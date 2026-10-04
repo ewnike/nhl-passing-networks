@@ -1,0 +1,7 @@
+artifact_id,s3_uri,artifact_type,source,description
+flo_clip_001_wide_hockeyai,s3://ewnike-nhl-passing-networks-2026/runs/hockeyai_baseline/flo_clip_001_wide_hockeyai/,detection_run,HockeyAI,HockeyAI baseline inference on 6-second wide-view FloHockey clip; saved rendered video and frame-level labels/confidences
+flo_clip_001_wide_botsort,s3://ewnike-nhl-passing-networks-2026/runs/botsort/flo_clip_001_wide_botsort/,tracking_run,HockeyAI+BoT-SORT,HockeyAI detections tracked with BoT-SORT; 180 frame label files plus rendered tracked MP4
+puck_yolo_v2-2,s3://ewnike-nhl-passing-networks-2026/runs/puck_legacy/puck_yolo_v2-2/,training_run,Custom YOLO,Earlier puck-only detector experiment; retained as legacy baseline
+puck_yolo_v5_cpu,s3://ewnike-nhl-passing-networks-2026/runs/puck_legacy/puck_yolo_v5_cpu/,training_run,Custom YOLO,Later puck-only detector experiment; retained as legacy baseline
+flo_game001_seg1651,s3://ewnike-nhl-passing-networks-2026/raw/flohockey/game_001/segments/segment-1777384806782_1_1651.ts,raw_video,FloHockey,Original 6-second transport-stream source segment preserved before remuxing
+clip_001_wide,s3://ewnike-nhl-passing-networks-2026/derived/clips/game_001/clip_001_wide.mp4,derived_video,FloHockey,6-second continuous wide-view control clip used for HockeyAI and BoT-SORT baseline experiments
