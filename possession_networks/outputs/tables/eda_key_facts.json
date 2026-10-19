@@ -1,0 +1,15 @@
+{
+  "competition": "Premier League 2015/2016",
+  "matches": 380,
+  "teams": 20,
+  "players": 644,
+  "events": 1313773,
+  "passes": 368619,
+  "shots": 9908,
+  "date_min": "2015-08-08",
+  "date_max": "2016-05-17",
+  "median_match_minutes": 96.2,
+  "data_versions": [
+    "1.1.0"
+  ]
+}
