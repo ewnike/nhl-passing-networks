@@ -2,9 +2,9 @@
 
 *How a visual dataset exploration tool helped me organize, inspect, and evaluate hockey rink landmarks.*
 
-**Status:** Draft for review — not yet published
-**Project:** NHL Puck Tracking & Passing Networks
-**Draft date:** October 20, 2026
+![An alien chef goes from a chaotic kitchen to an organized workspace](./images/alien_kitchen_before_after.png)
+
+*AI-generated illustration.*
 
 ## Introduction
 
@@ -52,7 +52,7 @@ As our research progressed, we created a second FiftyOne dataset to compare the 
 
 For this experiment, we used a single hockey frame containing 15 annotated rink landmarks.
 
-The pretrained model returned 56 keypoint slots, because its architecture is designed to predict all 56 possible rink landmarks.
+The pretrained model returned 56 keypoint slots because its architecture is designed to predict all 56 possible rink landmarks.
 
 That doesn't mean all 56 landmarks are visible in every frame.
 
@@ -148,19 +148,12 @@ For now, my introduction to FiftyOne has reinforced a simple lesson:
 
 **Before trusting what a computer-vision model tells you, you need a practical way to examine the evidence.**
 
-And sometimes, having the right tools to organize your workshop is just as important as knowing how to build what's inside it.
+Sometimes, having the right tools to organize your workshop is just as important as knowing how to build what's inside it.
 
 ---
 
 ## Reference
 
-[1] **Houshmand Sarkhoosh, M., Midoglu, C., & Halvorsen, P.** (2025). *HockeyRink: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics.* ACM Multimedia Systems Conference. https://doi.org/10.1145/3712676.3718338
+[1] **Houshmand Sarkhoosh, M., Gautam, S., Midoglu, C., Shafiee Sabet, S., Kupka, T., & Halvorsen, P.** (2025). *HockeyRink: A Dataset for Precise Ice Hockey Rink Keypoint Mapping and Analytics.* In *Proceedings of the 16th ACM Multimedia Systems Conference (MMSys ’25)* (pp. 249–255).  ⁠https://doi.org/10.1145/3712676.3718338
 
 **Project and tool links:** [FiftyOne documentation](https://docs.voxel51.com/) · [Voxel51](https://voxel51.com/) · [HockeyRink model on Hugging Face](https://huggingface.co/SimulaMet-HOST/HockeyRink)
-
-### Editorial checklist (remove before publication)
-
-- [ ] Insert two screenshots from the FiftyOne experiment; confirm image use and appropriate HockeyRink attribution.
-- [ ] Verify the final bibliographic formatting against the publisher's record.
-- [ ] Review all technical claims and ensure single-frame results are not presented as general model performance.
-- [ ] Obtain final author approval and remove this checklist and draft status.
