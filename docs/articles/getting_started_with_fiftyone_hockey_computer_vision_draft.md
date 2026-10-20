@@ -60,8 +60,9 @@ Some landmarks might be outside the camera's view, while others may be obscured 
 
 We needed a way to distinguish the model's raw output from the predictions worth displaying for visual inspection.
 
-**Figure 1 (proposed).** *FiftyOne's sample viewer displaying the original HockeyRink source annotations on an SHL frame. The annotation layer is kept separate from model predictions so readers can identify the provenance of each marker.*
-**[Insert screenshot: source annotations only. Confirm permission/attribution before publication.]**
+![Original HockeyRink landmark annotations in FiftyOne](./images/fiftyone_source_annotations.png)
+
+*Figure 1. Original HockeyRink landmark annotations displayed in FiftyOne. The 15 visible landmarks are shown as turquoise markers.*
 
 ### Filtering Predictions by Confidence
 
@@ -101,8 +102,9 @@ This revealed another important lesson: a model can report high confidence that 
 
 Confidence is useful, but it isn't a guarantee of positional accuracy.
 
-**Figure 2 (proposed).** *The same SHL frame with original source annotations and confidence-filtered HockeyRink predictions enabled in separate FiftyOne layers. The comparison illustrates how two coordinate sources can be inspected without overwriting either one. Display colors are determined by the FiftyOne view.*
-**[Insert screenshot: source annotations + confidence-filtered predictions; raw predictions hidden. Confirm permission/attribution before publication.]**
+![Comparison of HockeyRink annotations and pretrained predictions](./images/fiftyone_annotation_prediction_comparison.png)
+
+*Figure 2. Original HockeyRink annotations (turquoise) and confidence-filtered pretrained predictions (blue). Both layers can be inspected independently.*
 
 ## Preserving What We Learned
 
