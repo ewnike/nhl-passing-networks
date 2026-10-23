@@ -165,9 +165,156 @@ The numerical files and image are currently referenced as **local artifacts**; t
 
 ## 4. Planned Follow-up Experiments
 
-### Experiment 02 — Projected Rink Geometry Validation
+---
 
-Project the center red line, both blue lines, center circle, and neutral-zone faceoff dots through the existing homography onto `frame_0010.jpg`. Inspect agreement with painted markings, especially geometry not used as RANSAC inliers. Record observed deviations without treating the projected overlay alone as ground truth.
+# Experiment 02 — Projected Rink Geometry Validation
+
+**Date:** 2026-10-22  
+**Game:** Swiss National League Finals — G01  
+**Period:** 1  
+**Frame:** `frame_0010.jpg`  
+**Status:** PROVISIONAL — Visual validation completed; quantitative alignment pending.
+
+## Research Question
+
+Does the homography estimated in Experiment 01 accurately project
+known IIHF rink geometry onto the corresponding broadcast image?
+
+## Methodology
+
+The rink-to-image homography calculated in Experiment 01 was reused
+without modification.
+
+The following IIHF rink features were projected onto the original
+broadcast frame:
+
+- Western blue line: X = -7.65 m
+- Center red line: X = 0.00 m
+- Eastern blue line: X = +7.65 m
+- Center faceoff circle: radius = 4.50 m
+- Four neutral-zone faceoff spots: (±6.00 m, ±7.00 m)
+
+No additional YOLO inference or homography estimation was performed.
+
+## Visual Observations
+
+### Observation 02.1 — Western Blue Line
+
+The projected western blue line appears displaced to the left of
+the painted blue line.
+
+The displacement appears to increase toward the near-camera side
+of the image.
+
+**Assessment:** Visible alignment discrepancy.
+
+### Observation 02.2 — Center Red Line
+
+The projected center red line follows the approximate direction
+of the painted center line.
+
+However, the projected line appears displaced leftward toward
+the lower portion of the image.
+
+**Assessment:** Visible alignment discrepancy.
+
+### Observation 02.3 — Center Faceoff Circle
+
+The projected center faceoff circle approximately follows the
+upper boundary of the painted circle.
+
+The projected lower boundary extends beyond the painted circle.
+
+**Assessment:** Projected circle size or perspective differs
+from the visible marking.
+
+### Observation 02.4 — Neutral-Zone Faceoff Spots
+
+FO-1 and FO-3 appear reasonably aligned with their painted
+faceoff spots.
+
+FO-2, corresponding to KP-23, appears displaced down and left
+relative to the painted spot.
+
+This is consistent with the discrepancy observed during
+Experiment 01.
+
+**Assessment:** Mixed alignment quality.
+
+### Observation 02.5 — Apparent Rink Tilt
+
+During visual inspection, the rink geometry appeared to exhibit
+a downward tilt.
+
+The projected rink markings and actual painted markings appear
+to have different perspective orientations.
+
+The apparent discrepancy is more noticeable toward the
+near-camera side of the image.
+
+**Assessment:** Possible perspective-alignment discrepancy.
+
+This observation does not establish that the physical rink
+surface is tilted.
+
+## Interpretation
+
+The Experiment 01 homography produced a mean RANSAC inlier
+reprojection error of 1.545 pixels.
+
+However, Experiment 02 demonstrates that a low inlier
+reprojection error does not necessarily guarantee accurate
+alignment with the visible rink markings.
+
+The observed discrepancies may be associated with:
+
+- Landmark localization errors.
+- Insufficient spatial distribution of reliable landmarks.
+- Sensitivity to the selected RANSAC inlier set.
+- Differences between predicted landmarks and physical markings.
+- Camera perspective or lens-distortion effects.
+
+These remain hypotheses rather than confirmed causes.
+
+## Experiment Artifacts
+
+**Script:**
+
+`scripts/hockeyrink/project_g01_rink_geometry.py`
+
+**Results directory:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_02/`
+
+**Files:**
+
+- `projected_rink_geometry.jpg`
+- `geometry_projection_metadata.json`
+
+**Source homography:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_01/homography.json`
+
+## Preliminary Conclusion
+
+The estimated homography captures several important features
+of the broadcast rink geometry.
+
+However, visible alignment discrepancies remain, particularly
+along the western blue line, center red line, and center circle.
+
+The transformation should not yet be treated as a validated
+physical rink calibration.
+
+**Experiment status: PROVISIONAL**
+
+## Next Research Actions
+
+1. Quantify projected-versus-painted line displacement.
+2. Investigate the influence of KP-23 and KP-26.
+3. Evaluate alternative landmark subsets.
+4. Compare homographies across neighboring frames.
+5. Preserve the original Experiment 01 homography as the baseline.
 
 ### Experiment 03 — Temporal Consistency
 
