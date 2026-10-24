@@ -619,3 +619,233 @@ rink calibration.
 3. Evaluate independent projected-versus-painted rink alignment.
 4. Investigate spatial landmark coverage and geometric leverage.
 5. Proceed to Experiment 04 — Temporal Homography Consistency.
+
+---
+
+# Experiment 04 — Temporal Homography Consistency
+
+**Date:** 2026-10-23
+**Game:** Swiss National League Finals — G01
+**Period:** 1
+**Frame:** `frame_0011.jpg`
+**Status:** IN PROGRESS — Independent geometric validation completed for Stage 3B.
+
+## Stage 3B — Independent Painted Rink-Line Alignment Validation
+
+### Research Question
+
+Which of the two independently estimated homographies for `frame_0011.jpg` more accurately projects known IIHF rink geometry onto the visible painted rink markings?
+
+Specifically, does Strategy B, which incorporates an expanded set of eligible landmark predictions, produce better physical alignment than Strategy A?
+
+### Experimental Background
+
+Experiment 04 Stage 2 produced two homographies for the same broadcast frame.
+
+| Configuration | Candidate Landmarks | RANSAC Inliers | Mean Inlier Error |
+|---|---:|---:|---:|
+| Strategy A — Fixed | 7 | 5 | 0.546 px |
+| Strategy B — Expanded | 9 | 5 | 1.215 px |
+
+The two homographies were estimated using different landmark selections.
+
+Their RANSAC inlier sets were:
+
+**Strategy A:** KP-20, KP-22, KP-24, KP-26, KP-32.
+
+**Strategy B:** KP-24, KP-25, KP-27, KP-33, KP-34.
+
+Only KP-24 was common to both inlier sets.
+
+Earlier visual inspection suggested that Strategy B followed the painted rink markings more closely, particularly along the blue lines.
+
+Stage 3B was designed to evaluate that observation quantitatively.
+
+### Methodology
+
+Fifteen points were manually annotated on the original broadcast image using an OpenCV mouse-click interface.
+
+The annotations were distributed across three rink markings:
+
+| Rink Marking | Physical X Coordinate | Annotations |
+|---|---:|---:|
+| Western blue line | -7.65 m | 5 |
+| Center red line | 0.00 m | 5 |
+| Eastern blue line | +7.65 m | 5 |
+| **Total** | | **15** |
+
+The annotations represent visually identified locations along the centers of the painted rink lines.
+
+Each homography was used to project the corresponding physical rink line into image coordinates.
+
+The perpendicular distance between each manually annotated point and its corresponding projected line was calculated.
+
+The calculation used the same 15 observations for both strategies.
+
+No additional HockeyRink inference was performed.
+
+Neither homography was refitted using the manual annotations.
+
+### Distance Measurement
+
+For a manually annotated image point \(P\) and a projected line passing through points \(A\) and \(B\), perpendicular distance was calculated as:
+
+\[
+d =
+\frac{
+|(B_x-A_x)(P_y-A_y)-(B_y-A_y)(P_x-A_x)|
+}{
+\sqrt{(B_x-A_x)^2+(B_y-A_y)^2}
+}
+\]
+
+The resulting distance is measured in image pixels.
+
+A smaller distance indicates closer alignment between the projected rink line and the manually annotated painted marking.
+
+### Independent Validation Results
+
+#### Mean Perpendicular Alignment Error
+
+| Rink Marking | Strategy A (px) | Strategy B (px) | Lower Error |
+|---|---:|---:|---|
+| Western blue line | 68.348 | 35.020 | B |
+| Center red line | 8.728 | 20.388 | A |
+| Eastern blue line | 74.424 | 51.420 | B |
+| **Overall mean** | **50.500** | **35.609** | **B** |
+
+#### Overall Error Statistics
+
+| Statistic | Strategy A | Strategy B |
+|---|---:|---:|
+| Mean error | 50.500 px | 35.609 px |
+| Median error | 32.452 px | 38.325 px |
+| Maximum error | 138.717 px | 68.834 px |
+
+Strategy B reduced the overall mean perpendicular alignment error by approximately:
+
+\[
+\frac{50.500-35.609}{50.500}\times100
+=
+29.49\%
+\]
+
+The maximum observed error decreased from 138.717 pixels to 68.834 pixels, a reduction of approximately 50.4%.
+
+However, Strategy B had a higher overall median error than Strategy A.
+
+### Observation 04.10 — Independent Validation Favors Strategy B on Mean Error
+
+Strategy B produced a lower overall mean perpendicular alignment error across the 15 manually annotated observations.
+
+The reduction was approximately 29.5%.
+
+This supports the earlier qualitative visual assessment that Strategy B follows the painted rink geometry more closely overall.
+
+### Observation 04.11 — Alignment Quality Varies by Rink Region
+
+Strategy B produced lower mean alignment errors along both blue lines.
+
+However, Strategy A produced lower mean error along the center red line.
+
+Therefore, neither homography was uniformly superior across all evaluated rink markings.
+
+### Observation 04.12 — RANSAC Residuals Do Not Establish Physical Accuracy
+
+Strategy A had the lower RANSAC mean inlier error:
+
+0.546 pixels compared with 1.215 pixels for Strategy B.
+
+Nevertheless, Strategy B achieved lower overall mean error against the independently annotated painted rink lines.
+
+This demonstrates that lower fitting residuals against selected model predictions do not necessarily correspond to better alignment with independently observed rink geometry.
+
+### Observation 04.13 — Maximum Alignment Error
+
+The maximum perpendicular alignment error was:
+
+- Strategy A: 138.717 pixels.
+- Strategy B: 68.834 pixels.
+
+Strategy B substantially reduced the largest observed alignment discrepancy.
+
+However, both maximum errors remain significant.
+
+### Interpretation
+
+The independent validation results support Strategy B as the preferred candidate for further investigation on `frame_0011.jpg`.
+
+The results also reinforce findings from Experiments 02 and 03 concerning the limitations of using RANSAC fitting residuals as the sole measure of calibration quality.
+
+Homography accuracy varies spatially.
+
+The distribution and localization accuracy of the landmarks used during estimation may contribute to this variation.
+
+These potential explanations remain hypotheses.
+
+The experiment does not establish that Strategy B provides sufficiently accurate physical coordinates for player or puck tracking.
+
+### Experimental Limitations
+
+1. Only one broadcast frame was evaluated.
+2. Fifteen manually annotated observations were used.
+3. Only three painted rink lines were evaluated.
+4. Manual annotation introduces measurement uncertainty.
+5. Painted-line width may affect the identification of stripe centers.
+6. Perpendicular line distance does not measure full two-dimensional landmark-position error.
+7. The method evaluates infinite projected lines rather than finite rink-line segments.
+8. Neither homography was independently validated against the complete rink geometry.
+9. The experiment does not establish physical-coordinate accuracy in meters.
+10. Temporal calibration stability remains under investigation.
+
+### Experiment Artifacts
+
+**Manual annotation script:**
+
+`scripts/hockeyrink/annotate_g01_rink_lines.py`
+
+**Validation script:**
+
+`scripts/hockeyrink/validate_g01_rink_line_alignment.py`
+
+**Homography estimation script:**
+
+`scripts/hockeyrink/evaluate_g01_temporal_homographies.py`
+
+**Manual annotations:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_3/manual_validation/painted_line_points.csv`
+
+**Independent alignment residuals:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_3/manual_validation/line_alignment_residuals.csv`
+
+**Visual comparison:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_3/frame_0011_comparison.jpg`
+
+**Source homographies:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_2/temporal_homographies.json`
+
+### Stage 3B Preliminary Conclusion
+
+Independent measurements support the qualitative assessment that Strategy B provides better overall painted-line alignment for `frame_0011.jpg`.
+
+Strategy B reduced the mean perpendicular alignment error from 50.500 pixels to 35.609 pixels.
+
+However, Strategy A remained more accurate along the center red line, and Strategy B's overall median error was higher.
+
+Neither transformation has been established as sufficiently accurate for unrestricted physical rink calibration.
+
+**Stage 3B status: COMPLETED — PROVISIONAL FINDINGS**
+
+**Experiment 04 overall status: IN PROGRESS**
+
+### Next Research Actions
+
+1. Preserve manual annotations and validation results in durable research storage.
+2. Verify reproducibility of the independent line-alignment calculations.
+3. Investigate the spatial distribution of alignment errors.
+4. Evaluate homography stability across a short sequence sampled at 25 FPS.
+5. Continue investigating reliable physical-coordinate transformations for player and puck tracking.
