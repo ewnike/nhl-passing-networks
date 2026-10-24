@@ -316,26 +316,306 @@ physical rink calibration.
 4. Compare homographies across neighboring frames.
 5. Preserve the original Experiment 01 homography as the baseline.
 
-### Experiment 03 — Temporal Consistency
+### Experiment 03 — Landmark Localization and Homography Sensitivity
 
-Compare frames `0009`, `0010`, and `0011` using already saved predictions. Examine landmark motion, confidence, RANSAC membership, and variation in the estimated homography.
+Evaluate the sensitivity of the Experiment 01 homography to landmark
+selection, particularly KP-23 and KP-26.
 
-### Experiment 04 — Full 60-Frame Pilot
+Compare the baseline six-inlier homography with alternative
+transformations that include the rejected landmarks.
 
-Evaluate the complete pilot sequence, reporting fit success, inlier counts, residual distributions, camera-view failure cases, and temporal stability.
+**Status:** Completed; findings documented separately below.
+
+### Experiment 04 — Temporal Homography Consistency
+
+Compare frames `0009`, `0010`, and `0011` using previously saved
+HockeyRink predictions.
+
+Examine:
+
+- Landmark pixel displacement between frames.
+- Changes in landmark confidence.
+- Changes in RANSAC inlier membership.
+- Variation in estimated homography matrices.
+- Stability of projected physical rink geometry.
+
+**Status:** Planned.
+
+### Experiment 05 — Full Pilot-Sequence Evaluation
+
+Extend homography estimation and validation to the complete
+60-frame Period 1 pilot.
+
+Measure homography success rates, reprojection residuals,
+temporal stability, and failure cases.
+
+**Status:** Planned.
 
 ---
 
-## 5. Research Status and Update Convention
+# Experiment 03 — Landmark Localization and Homography Sensitivity
 
-**Current conclusion:** A mathematically consistent **candidate** image-to-rink transformation has been computed for one Swiss National League frame. Independent physical alignment and temporal validation remain pending.
+**Date:** 2026-10-23  
+**Game:** Swiss National League Finals — G01  
+**Period:** 1  
+**Frame:** `frame_0010.jpg`  
+**Status:** PROVISIONAL — Sensitivity demonstrated; physical accuracy unresolved.
 
-For future experiments, append a dated section that distinguishes:
+## Research Question
 
-- **Measurement:** Values directly produced by scripts or manual annotation.
-- **Observation:** What is visibly present in saved evidence.
-- **Interpretation:** Proposed explanation, clearly marked as provisional when unverified.
-- **Decision:** Whether the finding is confirmed, provisional, rejected, or requires investigation.
-- **Next test:** Specific procedure capable of resolving the uncertainty.
+How sensitive is the estimated rink-to-image homography to changes
+in landmark selection, particularly the inclusion of KP-23 and KP-26?
 
-Do not overwrite earlier findings silently; record revisions and their evidence.
+Can alternative landmark selections improve the geometric alignment
+between the projected rink and the painted rink markings?
+
+## Experimental Methodology
+
+Four homography configurations were evaluated using the same
+broadcast frame.
+
+| Configuration | Landmark Selection | Estimation Method |
+|---|---|---|
+| A — Baseline | Six original RANSAC inliers | Original Experiment 01 homography |
+| B — Include KP-23 | Baseline + KP-23 | Ordinary homography fitting |
+| C — Include KP-26 | Baseline + KP-26 | Ordinary homography fitting |
+| D — All eight | All eight candidate landmarks | Ordinary homography fitting |
+
+The original Experiment 01 homography was preserved without
+modification.
+
+Alternative homographies were calculated using OpenCV's
+`cv2.findHomography()` without RANSAC.
+
+This allowed the previously rejected landmarks to influence
+the fitted transformations.
+
+No additional HockeyRink model inference was performed.
+
+## Homography Fitting Results
+
+| Configuration | Landmarks | Mean Error (px) | Median Error (px) | Maximum Error (px) |
+|---|---:|---:|---:|---:|
+| A — Baseline | 6 | 1.545 | 1.703 | 2.751 |
+| B — Include KP-23 | 7 | 3.120 | 3.453 | 4.803 |
+| C — Include KP-26 | 7 | 3.914 | 2.562 | 10.217 |
+| D — All eight | 8 | 4.585 | 4.424 | 10.727 |
+
+### Observation 03.1 — Fitting Error
+
+The baseline homography produced a mean reprojection error
+of 1.545 pixels on its six selected inliers.
+
+Including KP-23 increased the mean fitting error to 3.120 pixels.
+
+Including KP-26 increased the mean fitting error to 3.914 pixels.
+
+Including both landmarks produced a mean fitting error
+of 4.585 pixels.
+
+These results demonstrate increased fitting disagreement when
+the previously rejected landmarks are included.
+
+However, the fitting sets contain different numbers of landmarks.
+
+Therefore, these measurements cannot independently establish
+which homography is physically most accurate.
+
+## Transformation Sensitivity Analysis
+
+To evaluate how landmark selection affects the resulting
+transformation, seven fixed physical rink locations were projected
+through all four homographies.
+
+The following coordinates were evaluated:
+
+| Reference | X (m) | Y (m) | Description |
+|---|---:|---:|---|
+| KP-21 | -7.65 | -15.00 | Western blue line, south boards |
+| KP-20 | -7.65 | +15.00 | Western blue line, north boards |
+| KP-30 | 0.00 | -15.00 | Center red line, south boards |
+| KP-26 | 0.00 | 0.00 | Center-ice faceoff spot |
+| KP-24 | 0.00 | +15.00 | Center red line, north boards |
+| KP-35 | +7.65 | -15.00 | Eastern blue line, south boards |
+| KP-34 | +7.65 | +15.00 | Eastern blue line, north boards |
+
+For each alternative homography, the projected pixel coordinates
+were compared with those produced by the baseline homography.
+
+Euclidean displacement was calculated using:
+
+\[
+d_i =
+\sqrt{
+(x_{i,\mathrm{alternative}} - x_{i,\mathrm{baseline}})^2
++
+(y_{i,\mathrm{alternative}} - y_{i,\mathrm{baseline}})^2
+}
+\]
+
+These measurements quantify transformation sensitivity,
+not independent physical accuracy.
+
+## Transformation Displacement Results
+
+| Configuration | Mean Displacement (px) | Maximum Displacement (px) |
+|---|---:|---:|
+| A — Baseline | 0.000 | 0.000 |
+| B — Include KP-23 | 20.381 | 82.599 |
+| C — Include KP-26 | 29.116 | 85.542 |
+| D — All eight | 25.479 | 104.243 |
+
+### Observation 03.2 — Maximum Transformation Displacement
+
+All three alternative homographies produced their maximum
+measured displacement at:
+
+**Physical rink coordinate: (-7.65, -15.00) meters**
+
+This corresponds to KP-21:
+
+`western_blue_line_south_board_intersection`
+
+The largest displacement was 104.243 pixels, observed when
+all eight candidate landmarks were included.
+
+The baseline's maximum displacement is zero by definition,
+so its reported maximum location is not meaningful.
+
+### Observation 03.3 — Spatial Distribution of Sensitivity
+
+The greatest measured transformation displacement occurred
+at the western blue-line intersection with the south boards.
+
+This location was not included among the eight original
+high-confidence candidate landmarks.
+
+The original KP-21 model prediction had a confidence
+of approximately 0.245, below the 0.80 threshold.
+
+This may indicate that insufficient reliable landmark coverage
+contributes to transformation sensitivity in that region.
+
+However, the experiment does not establish a causal relationship
+between KP-21 exclusion and the observed displacement.
+
+### Observation 03.4 — Visual Versus Numerical Assessment
+
+The four projected rink geometries appeared relatively similar
+during initial visual inspection.
+
+However, quantitative analysis revealed maximum differences
+exceeding 80 pixels for each alternative transformation.
+
+The largest measured displacement exceeded 100 pixels.
+
+This demonstrates that visual inspection of overlapping
+homography projections can conceal substantial differences
+at particular rink locations.
+
+## Interpretation
+
+Experiment 03 demonstrates that landmark selection materially
+influences the estimated rink-to-image transformation.
+
+The greatest sensitivity among the seven tested locations
+occurred near the western blue line and south boards.
+
+Potential contributing factors include:
+
+- Uneven spatial distribution of reliable landmarks.
+- Landmark localization errors.
+- Geometric leverage of particular correspondences.
+- Insufficient constraints near the camera-side boards.
+- Differences between predicted landmarks and physical rink geometry.
+
+These explanations remain hypotheses.
+
+The results do not establish that the baseline homography
+is physically more accurate than the alternatives.
+
+## Relationship to Experiment 02
+
+Experiment 02 identified visible discrepancies between
+projected rink geometry and painted rink markings.
+
+These discrepancies appeared more pronounced toward
+the near-camera portion of the image.
+
+Experiment 03 provides additional evidence that projected
+rink geometry is sensitive to landmark selection in this region.
+
+However, transformation disagreement does not directly measure
+the error relative to the actual painted markings.
+
+Independent geometric validation remains necessary.
+
+## Experimental Limitations
+
+1. Only one broadcast frame was evaluated.
+2. Only eight candidate landmarks were available.
+3. Seven fixed physical reference locations were tested.
+4. Displacement was measured in image pixels.
+5. No independently annotated ground-truth landmarks were used.
+6. Alternative homographies used different fitting sets.
+7. Temporal stability was not evaluated.
+8. Maximum displacement was measured only among the seven
+   selected reference locations.
+
+## Experiment Artifacts
+
+**Python script:**
+
+`scripts/hockeyrink/evaluate_g01_homography_sensitivity.py`
+
+**Results directory:**
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_03/`
+
+**Generated artifacts:**
+
+- `A_baseline.jpg`
+- `B_with_KP23.jpg`
+- `C_with_KP26.jpg`
+- `D_all_eight.jpg`
+- `combined_comparison.jpg`
+- `sensitivity_results.csv`
+- `homography_matrices.json`
+
+The transformation-displacement calculation was performed
+using an ad hoc Python command.
+
+The calculation should be incorporated into the permanent
+experiment script to ensure reproducibility.
+
+## Experiment 03 Conclusion
+
+The experiment demonstrates substantial sensitivity of the
+estimated homography to landmark selection.
+
+Including KP-23 and KP-26 produced measurable changes in
+the projected rink geometry.
+
+The largest measured displacement was:
+
+**104.243 pixels at KP-21 (-7.65, -15.00 meters).**
+
+This result highlights the importance of spatial landmark
+coverage and independent geometric validation.
+
+The original six-inlier homography remains our experimental
+baseline.
+
+It should not yet be considered a fully validated physical
+rink calibration.
+
+**Final experimental status: PROVISIONAL**
+
+## Next Research Actions
+
+1. Incorporate transformation-displacement calculations into
+   the permanent Experiment 03 Python script.
+2. Save individual reference-point displacements to CSV.
+3. Evaluate independent projected-versus-painted rink alignment.
+4. Investigate spatial landmark coverage and geometric leverage.
+5. Proceed to Experiment 04 — Temporal Homography Consistency.
