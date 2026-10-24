@@ -1,8 +1,8 @@
 # HockeyRink Landmark Consistency Analysis
 
-**Project:** NHL Puck Tracking & Passing Networks  
-**Research area:** Rink landmark detection, geometric consistency, and homography  
-**Status:** Active research  
+**Project:** NHL Puck Tracking & Passing Networks
+**Research area:** Rink landmark detection, geometric consistency, and homography
+**Status:** Active research
 **Last updated:** 2026-10-22
 
 ---
@@ -849,3 +849,383 @@ Neither transformation has been established as sufficiently accurate for unrestr
 3. Investigate the spatial distribution of alignment errors.
 4. Evaluate homography stability across a short sequence sampled at 25 FPS.
 5. Continue investigating reliable physical-coordinate transformations for player and puck tracking.
+
+---
+
+# Experiment 04 — Stage 4: Dense Temporal Homography Evaluation
+
+**Date:** 2026-10-23
+**Game:** Swiss National League Finals — G01
+**Period:** 1
+**Video interval:** Approximately 9–12 seconds
+**Sampling rate:** 25 FPS
+**Status:** Stages 4A–4C completed; Stage 4D planned.
+
+## Research Objective
+
+Evaluate the temporal behavior of HockeyRink landmark predictions and independently estimated homographies during continuous broadcast-camera movement.
+
+The experiment investigates whether changes in landmark availability, RANSAC inlier membership, and geometric conditioning are associated with changes in projected rink geometry.
+
+The ultimate objective is reliable image-to-rink calibration for player tracking, puck tracking, Voronoi tessellations, and passing-network analysis.
+
+## Stage 4A — Dense Landmark Inference and Motion
+
+### Methodology
+
+Seventy-five frames were extracted from approximately seconds 9–12 of the first period of Swiss National League Finals Game 01.
+
+Frames were sampled at 25 FPS.
+
+Mehdi's pretrained `HockeyRink.pt` model was applied to all 75 frames.
+
+The model produces 56 keypoint predictions per rink detection.
+
+Landmarks with confidence greater than or equal to 0.80 were selected for temporal analysis.
+
+Displacement was calculated only when a landmark exceeded this threshold in both consecutive frames.
+
+### Inference Results
+
+| Measurement | Result |
+|---|---:|
+| Frames processed | 75 |
+| Successful rink detections | 75 |
+| Detection coverage | 100% |
+| Keypoint predictions | 4,200 |
+| Total inference time | 9.330 seconds |
+| Mean processing time | 0.1244 seconds/frame |
+| High-confidence landmarks per frame | 7–20 |
+| Mean high-confidence landmarks | 9.173 |
+
+### Landmark Motion Results
+
+| Measurement | Result |
+|---|---:|
+| Consecutive-frame displacement measurements | 658 |
+| Mean displacement | 23.371 px |
+| Median displacement | 14.340 px |
+| Maximum displacement | 104.605 px |
+
+The largest individual displacement occurred at KP-36 in frame `0068`.
+
+Its horizontal displacement was approximately −104.56 pixels.
+
+Several other landmarks exhibited substantial coordinated leftward movement during the same interval.
+
+### Observation 04.14 — Coordinated Landmark Motion
+
+Multiple high-confidence landmarks exhibited substantial leftward displacement during the final portion of the dense sequence.
+
+The maximum individual displacement was 104.605 pixels.
+
+The largest mean landmark displacement occurred in frame `0068`, averaging approximately 74.14 pixels across nine eligible landmarks.
+
+These observations are consistent with substantial camera movement.
+
+### Observation 04.15 — Continuous Broadcast-Camera Motion
+
+Visual inspection of frames `0060–0074` showed continuous wide-angle gameplay.
+
+No obvious camera cut or player close-up was observed.
+
+The rink markings moved progressively leftward as the camera followed play toward the eastern offensive zone.
+
+### Observation 04.16 — Increasing Landmark Availability
+
+High-confidence landmark availability increased near the end of the sequence.
+
+Frames `0072` and `0074` each contained 20 high-confidence landmarks.
+
+The increased visibility of eastern-zone rink markings may contribute to this increase.
+
+This explanation remains provisional.
+
+## Stage 4B — Dense Homography Estimation
+
+### Methodology
+
+Independent homographies were estimated for all 75 frames using:
+
+- Saved HockeyRink keypoint predictions.
+- The canonical 56-landmark IIHF coordinate dictionary.
+- Keypoint confidence threshold of 0.80.
+- OpenCV RANSAC.
+- Reprojection threshold of 5 pixels.
+
+Each frame was processed independently.
+
+No temporal smoothing or previous-frame constraints were applied.
+
+### Results
+
+| Measurement | Result |
+|---|---:|
+| Frames processed | 75 |
+| Successful homographies | 75 |
+| Failed homographies | 0 |
+| Estimation success rate | 100% |
+| Mean inlier reprojection error | 1.099 px |
+| Median frame mean error | 1.263 px |
+| Minimum RANSAC inliers | 4 |
+| Maximum RANSAC inliers | 8 |
+
+### Observation 04.17 — Successful Estimation Does Not Establish Calibration Accuracy
+
+All 75 frames produced homographies satisfying the estimator's minimum requirements.
+
+However, the number of RANSAC inliers ranged from four to eight.
+
+Four correspondences constitute a minimal homography solution.
+
+A minimal solution may produce nearly zero fitting residual while remaining sensitive to landmark localization errors and poorly constrained extrapolation.
+
+Therefore, successful estimation and low fitting residuals do not establish physical calibration accuracy.
+
+## Stage 4C — Temporal Homography Stability
+
+### Methodology
+
+Seven fixed physical rink reference locations were projected through consecutive independently estimated homographies.
+
+The reference landmarks were:
+
+KP-20, KP-21, KP-24, KP-26, KP-30, KP-34, and KP-35.
+
+For each transition, projected image-space displacement was calculated.
+
+The experiment evaluated 74 consecutive frame transitions.
+
+### Temporal Projection Results
+
+| Measurement | Result |
+|---|---:|
+| Frame transitions | 74 |
+| Reference points | 7 |
+| Displacement measurements | 518 |
+| Mean frame-transition displacement | 59.820 px |
+| Median frame-transition displacement | 29.841 px |
+| Maximum observed displacement | 881.700 px |
+
+The maximum displacement occurred at KP-21 during the transition ending at frame `0069`.
+
+### Spatial Distribution
+
+| Landmark | Mean displacement | Maximum displacement |
+|---|---:|---:|
+| KP-20 | 26.960 px | 312.366 px |
+| KP-21 | 147.178 px | 881.700 px |
+| KP-24 | 24.598 px | 156.305 px |
+| KP-26 | 20.762 px | 71.617 px |
+| KP-30 | 72.252 px | 322.418 px |
+| KP-34 | 34.319 px | 308.598 px |
+| KP-35 | 92.673 px | 838.952 px |
+
+The three southern-board reference points exhibited an average of their individual mean displacements of approximately 104.034 pixels.
+
+The corresponding northern-board average was approximately 28.626 pixels.
+
+The southern-board average was approximately 3.63 times the northern-board average.
+
+### Observation 04.18 — Spatially Concentrated Projection Variation
+
+The largest temporal projection changes were concentrated near the southern-board reference locations.
+
+This pattern is consistent with increased perspective sensitivity and potentially poorly constrained extrapolation outside the visible image.
+
+However, substantial changes also occurred at northern-board reference locations.
+
+The measurements do not independently distinguish genuine camera movement from calibration error.
+
+## RANSAC Membership Continuity
+
+### Methodology
+
+Consecutive RANSAC inlier sets were compared using Jaccard similarity.
+
+For inlier sets \(A\) and \(B\):
+
+\[
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}
+\]
+
+A value of 1 indicates identical sets.
+
+A value of 0 indicates no shared inliers.
+
+### Results
+
+| Measurement | Result |
+|---|---:|
+| Transitions | 74 |
+| Mean Jaccard similarity | 0.764 |
+| Median Jaccard similarity | 0.857 |
+| Minimum Jaccard similarity | 0.083 |
+| Transitions below 0.25 | 3 |
+
+The three lowest-continuity transitions were:
+
+| Frame | Jaccard similarity | Retained inliers |
+|---|---:|---:|
+| 0061 | 0.111 | 1 |
+| 0070 | 0.182 | 2 |
+| 0071 | 0.083 | 1 |
+
+### Observation 04.19 — Inlier Membership Is Generally Stable
+
+Median Jaccard similarity was 0.857.
+
+This indicates substantial inlier-set overlap during many consecutive transitions.
+
+However, several transitions exhibited abrupt membership changes.
+
+### Observation 04.20 — Membership Turnover Accompanies Large Geometric Changes
+
+Several large projected-geometry changes coincided with substantial changes in RANSAC membership.
+
+For example, the transition ending at frame `0071` retained only one inlier and exhibited a maximum projected displacement of approximately 841.69 pixels.
+
+However, frame `0069` produced the largest displacement despite retaining four inliers.
+
+Membership turnover alone does not explain every large projection change.
+
+## Statistical Correlation Analysis
+
+### Research Question
+
+Is RANSAC inlier-set continuity associated with the magnitude of changes in projected rink geometry?
+
+### Statistical Methods
+
+Two correlation measures were calculated:
+
+**Pearson correlation:** Measures linear association.
+
+**Spearman rank correlation:** Measures monotonic association based on ranked observations.
+
+The analysis included 74 consecutive frame transitions.
+
+### Results
+
+| Dependent measurement | Pearson r | Spearman ρ |
+|---|---:|---:|
+| Mean projected displacement | −0.807 | −0.796 |
+| Maximum projected displacement | −0.757 | −0.816 |
+
+All four coefficients indicate strong negative associations.
+
+Lower Jaccard similarity generally accompanied larger projected rink displacement.
+
+The reported p-values were below the six-decimal display precision.
+
+These p-values should be interpreted cautiously because the consecutive frame transitions are temporally dependent observations from a single video sequence.
+
+### Observation 04.21 — Strong Negative Correlation
+
+RANSAC inlier-set continuity exhibited strong negative correlations with projected rink displacement.
+
+For mean displacement:
+
+- Pearson r = −0.807.
+- Spearman ρ = −0.796.
+
+For maximum displacement:
+
+- Pearson r = −0.757.
+- Spearman ρ = −0.816.
+
+These results identify landmark-membership continuity as a potentially useful diagnostic for homography stability.
+
+They do not establish that membership turnover causes geometric instability.
+
+### Interpretation
+
+The results suggest that abrupt changes in the landmarks supporting a homography frequently accompany large changes in projected rink geometry.
+
+However, the experiment also includes genuine camera movement, changing landmark visibility, and projections outside the visible rink.
+
+These factors may contribute to the observed associations.
+
+The results therefore support further investigation rather than immediate adoption of a fixed Jaccard acceptance threshold.
+
+## Experimental Limitations
+
+1. The analysis covers only three seconds of one game.
+2. Consecutive observations are temporally dependent.
+3. The homographies were estimated independently.
+4. Some reference points may lie outside the visible image.
+5. Projected displacement is not equivalent to calibration error.
+6. Camera motion contributes to image-space displacement.
+7. The experiment does not establish physical-coordinate accuracy in meters.
+8. No independent painted-line validation was performed across all 75 frames.
+9. Correlation does not establish causation.
+10. The results do not yet establish acceptable calibration quality for player or puck tracking.
+
+## Reproducibility Artifacts
+
+### Canonical Coordinates
+
+`docs/hockeyrink/hockeyrink_keypoints.md`
+
+`data/reference/hockeyrink_56_landmarks_iihf.json`
+
+### Python Scripts
+
+`scripts/hockeyrink/export_rink_landmarks.py`
+
+`scripts/hockeyrink/analyze_g01_dense_landmarks.py`
+
+`scripts/hockeyrink/evaluate_g01_dense_homographies.py`
+
+`scripts/hockeyrink/analyze_g01_dense_homography_stability.py`
+
+### Saved Experimental Data
+
+All paths below are relative to:
+
+`local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_4/`
+
+- `detections.json`
+- `inference_summary.json`
+- `dense_landmark_stability.csv`
+- `dense_homographies.json`
+- `dense_homography_summary.csv`
+- `dense_homography_temporal_displacements.csv`
+- `rapid_motion_contact_sheet.jpg`
+
+The Jaccard and correlation analyses were performed using saved experiment data and ad hoc Python commands.
+
+Their calculations should be consolidated into a reusable script before the experiment is considered fully reproducible.
+
+## Stage 4 Preliminary Conclusion
+
+All 75 dense-sequence frames produced homography estimates.
+
+However, the resulting transformations exhibited substantial variation in projected rink geometry.
+
+The largest variations were concentrated near southern-board reference locations, although other rink regions were also affected.
+
+RANSAC membership continuity was generally high but occasionally changed abruptly.
+
+Strong negative correlations were observed between inlier-set Jaccard similarity and projected rink displacement.
+
+These results identify landmark-selection continuity as a promising diagnostic signal.
+
+They do not establish physical calibration accuracy or prove that landmark turnover causes the observed geometric variation.
+
+**Stage 4A: COMPLETE**
+
+**Stage 4B: COMPLETE**
+
+**Stage 4C: COMPLETE — PRELIMINARY FINDINGS**
+
+**Stage 4D: PLANNED**
+
+## Next Research Actions
+
+1. Evaluate homography behavior within the visible rink region.
+2. Distinguish camera motion from calibration instability.
+3. Investigate projective extrapolation and geometric conditioning.
+4. Consolidate Jaccard and correlation calculations into a reproducible Python script.
+5. Evaluate temporal calibration constraints without modifying the original independent estimates.
+6. Validate physical-coordinate accuracy before using homographies for player and puck tracking.

@@ -1,0 +1,405 @@
+{
+  "reference": "docs/hockeyrink/hockeyrink_keypoints.md",
+  "coordinate_system": {
+    "rink_length_m": 60.0,
+    "rink_width_m": 30.0,
+    "origin": "center_ice",
+    "x_positive": "east",
+    "y_positive": "north",
+    "units": "meters"
+  },
+  "landmarks": {
+    "0": {
+      "name": "west_trapezoid_line_north_board_intersection",
+      "x_m": -30.0,
+      "y_m": 4.3,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: board x=-30.00; 8.60/2=4.30"
+    },
+    "1": {
+      "name": "west_trapezoid_line_south_board_intersection",
+      "x_m": -30.0,
+      "y_m": -4.3,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: board x=-30.00; -(8.60/2)=-4.30"
+    },
+    "2": {
+      "name": "west_goal_line_north_board_intersection",
+      "x_m": -26.0,
+      "y_m": 15.0,
+      "description": "The goal line is located 4.00 m from the end boards and extends across the width of the rink.",
+      "source": "IIHF-derived, Appendix VI: x=-30.00+4.00=-26.00; north board y=+15.00"
+    },
+    "3": {
+      "name": "west_trapezoid_line_north_goal_line_intersection",
+      "x_m": -26.0,
+      "y_m": 3.4,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: goal line x=-26.00; 6.80/2=3.40"
+    },
+    "4": {
+      "name": "west_goalie_crease_line_north_goal_line_intersection",
+      "x_m": -26.0,
+      "y_m": 1.22,
+      "description": "Northern intersection of the west goal crease boundary with the west goal line.",
+      "source": "IIHF-derived: goal line x=-26.00; crease width 2.44 m; +2.44/2=+1.22"
+    },
+    "5": {
+      "name": "west_goalie_crease_line_south_goal_line_intersection",
+      "x_m": -26.0,
+      "y_m": -1.22,
+      "description": "Southern intersection of the west goal crease boundary with the west goal line.",
+      "source": "IIHF-derived: goal line x=-26.00; crease width 2.44 m; -(2.44/2)=-1.22"
+    },
+    "6": {
+      "name": "west_trapezoid_line_south_goal_line_intersection",
+      "x_m": -26.0,
+      "y_m": -3.4,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: goal line x=-26.00; -(6.80/2)=-3.40"
+    },
+    "7": {
+      "name": "west_goal_line_south_board_intersection",
+      "x_m": -26.0,
+      "y_m": -15.0,
+      "description": "The goal line is located 4.00 m from the end boards and extends across the width of the rink.",
+      "source": "IIHF-derived, Appendix VI: x=-30.00+4.00=-26.00; south board y=-15.0"
+    },
+    "8": {
+      "name": "west_top_of_goalie_crease_north",
+      "x_m": -24.63,
+      "y_m": 1.22,
+      "description": "Northern endpoint of the front boundary of the west goal crease.",
+      "source": "IIHF Rule 1.7 / Appendix VI: goal line x=-26.00; straight crease side extends 1.37 m toward center, x=-26.00+1.37=-24.63; y=+1.22"
+    },
+    "9": {
+      "name": "west_top_of_goalie_crease_south",
+      "x_m": -24.63,
+      "y_m": -1.22,
+      "description": "Southern endpoint of the front boundary of the west goal crease.",
+      "source": "IIHF Rule 1.7 / Appendix VI: goal line x=-26.00; straight crease side extends 1.37 m toward center, x=-26.00+1.37=-24.63; y=-1.22"
+    },
+    "10": {
+      "name": "western_end_zone_north_d_fo_hash_mark_north",
+      "x_m": -20.875,
+      "y_m": 11.414111,
+      "description": "Northern endpoint of the d-side hash-mark pair associated with the north faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (-20.875000,+11.414111)"
+    },
+    "11": {
+      "name": "western_end_zone_north_d_fo_hash_mark_south",
+      "x_m": -20.875,
+      "y_m": 2.585889,
+      "description": "Southern endpoint of the d-side hash-mark pair associated with the north faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (-20.875000,+2.585889)"
+    },
+    "12": {
+      "name": "western_end_zone_south_d_fo_hash_mark_north",
+      "x_m": -20.875,
+      "y_m": -2.585889,
+      "description": "Northern endpoint of the d-side hash-mark pair associated with the south faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (-20.875000,-2.585889)"
+    },
+    "13": {
+      "name": "western_end_zone_south_d_fo_hash_mark_south",
+      "x_m": -20.875,
+      "y_m": -11.414111,
+      "description": "Southern endpoint of the d-side hash-mark pair associated with the south faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (-20.875000,-11.414111)"
+    },
+    "14": {
+      "name": "western_end_zone_fo_dot_north",
+      "x_m": -20.0,
+      "y_m": 7.0,
+      "description": "Center faceoff dot of the north faceoff circle in the western end zone.",
+      "source": "IIHF-derived: -26.00 + 6.00 = -20.00"
+    },
+    "15": {
+      "name": "western_end_zone_fo_dot_south",
+      "x_m": -20.0,
+      "y_m": -7.0,
+      "description": "Center faceoff dot of the south faceoff circle in the western end zone.",
+      "source": "IIHF-derived: -26.00 + 6.00 = -20.00"
+    },
+    "16": {
+      "name": "western_end_zone_north_o_fo_hash_mark_north",
+      "x_m": -19.125,
+      "y_m": 11.414111,
+      "description": "Northern endpoint of the o-side hash-mark pair associated with the north faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (-19.125000,+11.414111)"
+    },
+    "17": {
+      "name": "western_end_zone_north_o_fo_hash_mark_south",
+      "x_m": -19.125,
+      "y_m": 2.585889,
+      "description": "Southern endpoint of the o-side hash-mark pair associated with the north faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (-19.125000,+2.585889)"
+    },
+    "18": {
+      "name": "western_end_zone_south_o_fo_hash_mark_north",
+      "x_m": -19.125,
+      "y_m": -2.585889,
+      "description": "Northern endpoint of the o-side hash-mark pair associated with the south faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (-19.125000,-2.585889)"
+    },
+    "19": {
+      "name": "western_end_zone_south_o_fo_hash_mark_south",
+      "x_m": -19.125,
+      "y_m": -11.414111,
+      "description": "Southern endpoint of the o-side hash-mark pair associated with the south faceoff circle in the western end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(-20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (-19.125000,-11.414111)"
+    },
+    "20": {
+      "name": "western_blue_line_north_board_intersection",
+      "x_m": -7.65,
+      "y_m": 15.0,
+      "description": "Northern board intersection of the western blue line; project coordinate uses the center of the 0.30 m painted blue line.",
+      "source": "IIHF Official Rule Book 2025/26, Appendix VI, p. 222: neutral-zone edge x=-7.50; blue-line width=0.30 m. Project convention: use painted-line center, x=-7.50-0.15=-7.65; north board y=+15.00"
+    },
+    "21": {
+      "name": "western_blue_line_south_board_intersection",
+      "x_m": -7.65,
+      "y_m": -15.0,
+      "description": "Southern board intersection of the western blue line; project coordinate uses the center of the 0.30 m painted blue line.",
+      "source": "IIHF Official Rule Book 2025/26, Appendix VI, p. 222: neutral-zone edge x=-7.50; blue-line width=0.30 m. Project convention: use painted-line center, x=-7.50-0.15=-7.65; south board y=-15.00"
+    },
+    "22": {
+      "name": "west_neutral_zone_north_faceoff_dot",
+      "x_m": -6.0,
+      "y_m": 7.0,
+      "description": "Faceoff dot immediately east of the western blue line, north side",
+      "source": "IIHF-direct: Official Rule Book 2025/26, Appendix VI, p. 222; neutral-zone faceoff spot is 6.00 m west of center red line and 7.00 m north of longitudinal center axis"
+    },
+    "23": {
+      "name": "west_neutral_zone_south_faceoff_dot",
+      "x_m": -6.0,
+      "y_m": -7.0,
+      "description": "Faceoff dot immediately east of the western blue line, south side",
+      "source": "IIHF-direct: Official Rule Book 2025/26, Appendix VI, p. 222; neutral-zone faceoff spot is 6.00 m west of center red line and 7.00 m south of longitudinal center axis"
+    },
+    "24": {
+      "name": "center_red_line_north_board_intersection",
+      "x_m": 0.0,
+      "y_m": 15.0,
+      "description": "Intersection of the center red line with the north boards.",
+      "source": "IIHF-derived: Official Rule Book 2025/26, Appendix VI, p. 222; center red line x=0.00; 30.00 m rink width gives north board y=+15.00"
+    },
+    "25": {
+      "name": "center_ice_faceoff_circle_north_hash_marks",
+      "x_m": 0.0,
+      "y_m": 4.5,
+      "description": "Northern intersection of the center red line with the center faceoff circle.",
+      "source": "IIHF-derived: Rule 1.9 / Appendix VI; center faceoff circle radius=4.50 m about origin (0.00,0.00); northern intersection=(0.00,+4.50)"
+    },
+    "26": {
+      "name": "center_ice_faceoff_spot",
+      "x_m": 0.0,
+      "y_m": 0.0,
+      "description": "Center faceoff spot at the geometric center of the rink.",
+      "source": "IIHF-direct: Rule 1.9 / Appendix VI; center-ice faceoff spot; project coordinate origin=(0.00,0.00)"
+    },
+    "27": {
+      "name": "center_ice_faceoff_circle_south_hash_marks",
+      "x_m": 0.0,
+      "y_m": -4.5,
+      "description": "Southern intersection of the center red line with the center faceoff circle.",
+      "source": "IIHF-derived: Rule 1.9 / Appendix VI; center faceoff circle radius=4.50 m about origin (0.00,0.00); southern intersection=(0.00,-4.50)"
+    },
+    "28": {
+      "name": "western_point_of_referee_crease",
+      "x_m": -3.0,
+      "y_m": -15.0,
+      "description": "Western endpoint of the referee crease along the south boards.",
+      "source": "IIHF-derived: Rule 1.8 / Appendix VI, Officials' Crease; radius=3.00 m centered on center red line at south board (0.00,-15.00); western endpoint=(-3.00,-15.00)"
+    },
+    "29": {
+      "name": "top_of_referee_crease",
+      "x_m": 0.0,
+      "y_m": -12.0,
+      "description": "Northernmost point of the referee crease.",
+      "source": "IIHF-derived: Rule 1.8 / Appendix VI, Officials' Crease; radius=3.00 m centered at (0.00,-15.00); apex y=-15.00+3.00=-12.00"
+    },
+    "30": {
+      "name": "center_red_line_south_board_intersection",
+      "x_m": 0.0,
+      "y_m": -15.0,
+      "description": "Intersection of the center red line with the south boards.",
+      "source": "IIHF-derived: Official Rule Book 2025/26, Appendix VI, p. 222; center red line x=0.00; 30.00 m rink width gives south board y=-15.00"
+    },
+    "31": {
+      "name": "eastern_point_referee_crease",
+      "x_m": 3.0,
+      "y_m": -15.0,
+      "description": "Eastern endpoint of the referee crease along the south boards.",
+      "source": "IIHF-derived: Rule 1.8 / Appendix VI, Officials' Crease; radius=3.00 m centered on center red line at south board (0.00,-15.00); eastern endpoint=(+3.00,-15.00)"
+    },
+    "32": {
+      "name": "east_neutral_zone_north_faceoff_dot",
+      "x_m": 6.0,
+      "y_m": 7.0,
+      "description": "Faceoff dot immediately west of the eastern blue line, north side",
+      "source": "IIHF-direct: Official Rule Book 2025/26, Appendix VI, p. 222; neutral-zone faceoff spot is 6.00 m east of center red line and 7.00 m north of longitudinal center axis"
+    },
+    "33": {
+      "name": "east_neutral_zone_south_faceoff_dot",
+      "x_m": 6.0,
+      "y_m": -7.0,
+      "description": "Faceoff dot immediately west of the eastern blue line, south side",
+      "source": "IIHF-direct: Official Rule Book 2025/26, Appendix VI, p. 222; neutral-zone faceoff spot is 6.00 m east of center red line and 7.00 m south of longitudinal center axis"
+    },
+    "34": {
+      "name": "eastern_blue_line_north_board_intersection",
+      "x_m": 7.65,
+      "y_m": 15.0,
+      "description": "Northern board intersection of the eastern blue line; project coordinate uses the center of the 0.30 m painted blue line.",
+      "source": "IIHF Official Rule Book 2025/26, Appendix VI, p. 222: neutral-zone edge x=+7.50; blue-line width=0.30 m. Project convention: use painted-line center, x=+7.50+0.15=+7.65; north board y=+15.00"
+    },
+    "35": {
+      "name": "eastern_blue_line_south_board_intersection",
+      "x_m": 7.65,
+      "y_m": -15.0,
+      "description": "Southern board intersection of the eastern blue line; project coordinate uses the center of the 0.30 m painted blue line.",
+      "source": "IIHF Official Rule Book 2025/26, Appendix VI, p. 222: neutral-zone edge x=+7.50; blue-line width=0.30 m. Project convention: use painted-line center, x=+7.50+0.15=+7.65; south board y=-15.00"
+    },
+    "36": {
+      "name": "eastern_end_zone_north_o_fo_hash_mark_north",
+      "x_m": 19.125,
+      "y_m": 11.414111,
+      "description": "Northern endpoint of the o-side hash-mark pair associated with the north faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (+19.125000,+11.414111)"
+    },
+    "37": {
+      "name": "eastern_end_zone_north_o_fo_hash_mark_south",
+      "x_m": 19.125,
+      "y_m": 2.585889,
+      "description": "Southern endpoint of the o-side hash-mark pair associated with the north faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (+19.125000,+2.585889)"
+    },
+    "38": {
+      "name": "eastern_end_zone_south_o_fo_hash_mark_north",
+      "x_m": 19.125,
+      "y_m": -2.585889,
+      "description": "Northern endpoint of the o-side hash-mark pair associated with the south faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (+19.125000,-2.585889)"
+    },
+    "39": {
+      "name": "eastern_end_zone_south_o_fo_hash_mark_south",
+      "x_m": 19.125,
+      "y_m": -11.414111,
+      "description": "Southern endpoint of the o-side hash-mark pair associated with the south faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (west of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (+19.125000,-11.414111)"
+    },
+    "40": {
+      "name": "eastern_end_zone_fo_dot_north",
+      "x_m": 20.0,
+      "y_m": 7.0,
+      "description": "Center faceoff dot of the north faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived: +26.00 + -6.00 = +20.00"
+    },
+    "41": {
+      "name": "eastern_end_zone_fo_dot_south",
+      "x_m": 20.0,
+      "y_m": -7.0,
+      "description": "Center faceoff dot of the south faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived: +26.00 + -6.00 = +20.00"
+    },
+    "42": {
+      "name": "eastern_end_zone_north_d_fo_hash_mark_north",
+      "x_m": 20.875,
+      "y_m": 11.414111,
+      "description": "Northern endpoint of the d-side hash-mark pair associated with the north faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (+20.875000,+11.414111)"
+    },
+    "43": {
+      "name": "eastern_end_zone_north_d_fo_hash_mark_south",
+      "x_m": 20.875,
+      "y_m": 2.585889,
+      "description": "Southern endpoint of the d-side hash-mark pair associated with the north faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,+7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (+20.875000,+2.585889)"
+    },
+    "44": {
+      "name": "eastern_end_zone_south_d_fo_hash_mark_north",
+      "x_m": 20.875,
+      "y_m": -2.585889,
+      "description": "Northern endpoint of the d-side hash-mark pair associated with the south faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; north circle intersection gives (+20.875000,-2.585889)"
+    },
+    "45": {
+      "name": "eastern_end_zone_south_d_fo_hash_mark_south",
+      "x_m": 20.875,
+      "y_m": -11.414111,
+      "description": "Southern endpoint of the d-side hash-mark pair associated with the south faceoff circle in the eastern end zone.",
+      "source": "IIHF-derived / project convention: faceoff center=(+20.00,-7.00); end-zone faceoff-circle radius=4.50 m; represent 5 cm painted hash mark by stripe center; horizontal offset=0.875 m (east of circle center); vertical circle component=sqrt(4.50^2-0.875^2)=4.414111 m; south circle intersection gives (+20.875000,-11.414111)"
+    },
+    "46": {
+      "name": "east_top_of_goalie_crease_north",
+      "x_m": 24.63,
+      "y_m": 1.22,
+      "description": "Northern endpoint of the front boundary of the east goal crease.",
+      "source": "IIHF Rule 1.7 / Appendix VI: goal line x=+26.00; straight crease side extends 1.37 m toward center, x=26.00-1.37=24.63; y=+1.22"
+    },
+    "47": {
+      "name": "east_top_of_goalie_crease_south",
+      "x_m": 24.63,
+      "y_m": -1.22,
+      "description": "Southern endpoint of the front boundary of the east goal crease.",
+      "source": "IIHF Rule 1.7 / Appendix VI: goal line x=+26.00; straight crease side extends 1.37 m toward center, x=26.00-1.37=24.63; y=-1.22"
+    },
+    "48": {
+      "name": "east_goal_line_north_board_intersection",
+      "x_m": 26.0,
+      "y_m": 15.0,
+      "description": "The goal line is located 4.00 m from the end boards and extends across the width of the rink.",
+      "source": "IIHF-derived, Appendix VI: x=+30.00-4.00=+26.00; north board y=+15.00"
+    },
+    "49": {
+      "name": "east_trapezoid_line_north_goal_line_intersection",
+      "x_m": 26.0,
+      "y_m": 3.4,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: east/west symmetry of KP-3"
+    },
+    "50": {
+      "name": "east_goalie_crease_line_north_goal_line_intersection",
+      "x_m": 26.0,
+      "y_m": 1.22,
+      "description": "Northern intersection of the east goal crease boundary with the east goal line.",
+      "source": "IIHF-derived: east/west symmetry of KP-4"
+    },
+    "51": {
+      "name": "east_goalie_crease_line_south_goal_line_intersection",
+      "x_m": 26.0,
+      "y_m": -1.22,
+      "description": "Southern intersection of the east goal crease boundary with the east goal line.",
+      "source": "IIHF-derived: east/west symmetry of KP-5"
+    },
+    "52": {
+      "name": "east_trapezoid_line_south_goal_line_intersection",
+      "x_m": 26.0,
+      "y_m": -3.4,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: east/west symmetry of KP-6"
+    },
+    "53": {
+      "name": "east_goal_line_south_board_intersection",
+      "x_m": 26.0,
+      "y_m": -15.0,
+      "description": "The goal line is located 4.00 m from the end boards and extends across the width of the rink.",
+      "source": "IIHF-derived, Appendix VI: x=+30.00-4.00=+26.00; south board y=-15.00"
+    },
+    "54": {
+      "name": "east_trapezoid_line_north_board_intersection",
+      "x_m": 30.0,
+      "y_m": 4.3,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: east/west symmetry of KP-0"
+    },
+    "55": {
+      "name": "east_trapezoid_line_south_board_intersection",
+      "x_m": 30.0,
+      "y_m": -4.3,
+      "description": "One of two 5 cm wide red lines that run diagonally from the goal line to the boards.",
+      "source": "IIHF-derived: east/west symmetry of KP-1"
+    }
+  }
+}
