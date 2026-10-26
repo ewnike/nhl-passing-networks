@@ -1,0 +1,9 @@
+name,severity,passed,n_checked,n_failing,detail
+possessions.unique_key,error,True,111725,0,
+possessions.team_in_match,error,True,111725,0,
+possessions.outcome_labels_valid,error,True,111725,0,
+possessions.broad_only_adds_turnovers,error,True,13934,0,
+possessions.shots_reconcile_with_events,error,True,760,0,net shot difference 0
+possessions.goals_reconcile_with_scores,error,True,760,0,a possession with several goals would count once
+possessions.duration_nonnegative,error,True,111725,0,
+possessions.min_one_team_event,warn,True,111725,0,

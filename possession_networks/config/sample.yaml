@@ -1,0 +1,32 @@
+# Configuration for the synthetic sample. Use with: POSSNET_CONFIG=config/sample.yaml
+# Nothing here touches licensed data. Outputs go to sample_data/ (git ignored).
+source: statsbomb
+
+statsbomb:
+  repo: synthetic
+  ref: synthetic
+  competition_id: 9999
+  season_id: 1
+  fetch_lineups: true
+  fetch_three_sixty: false
+  workers: 1
+  timeout_s: 60
+
+paths:
+  raw_dir: sample_data/raw
+  interim_dir: sample_data/interim
+  processed_dir: sample_data/processed
+  manifest_dir: sample_data/manifests
+  figures_dir: sample_data/outputs/figures
+  tables_dir: sample_data/outputs/tables
+
+modeling:
+  # Step 8 incremental value test. All randomness (fold assignment, bootstrap) derives from seed.
+  seed: 20261006
+  n_folds: 10
+  n_reps: 10          # repetitions of shuffled grouped K fold
+  n_boot: 2000        # paired bootstrap resamples over matches
+  # Primary analysis, fixed before looking at results (see docs/decisions.md D16).
+  primary_chain: strict_open
+  primary_scope: open_play
+  min_seq_len_grid: [1, 3, 5]
