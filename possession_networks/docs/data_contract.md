@@ -92,12 +92,12 @@ One row per player per match, including unused substitutes.
 * event_id is unique within a source; (match_id, event_index) is unique and event_index increases by exactly one within a match.
 * period never decreases as event_index increases.
 * Every events.match_id exists in matches; every team_id is the home or away team of that match; is_home agrees with team_id.
-* pass, shot, carry, reception events have x_start and y_start; pass, carry, shot events have x_end and y_end.
+* pass, shot, carry, reception events have x_start and y_start; pass, carry, shot events have x_end and y_end. Hockey shots are logged at the release point only, so in hockey only passes need an end location.
 * Located coordinates lie within the playing surface (a 1 meter tolerance is allowed).
-* A complete pass has a recipient_id, the recipient belongs to the passing team, and the recipient differs from the passer.
+* A complete pass has a recipient_id, the recipient belongs to the passing team, and the recipient differs from the passer. The hockey source has complete passes with no recorded receiver, so for hockey a missing recipient is a warning, not an error.
 * possession_team_id is constant within a (match_id, possession_id).
 * Every non null player_id in events has an appearances row for that match and team.
-* minutes_played is between 0 and the match duration, and team totals are close to 11 players times the match duration (soccer), allowing for red cards.
+* minutes_played is between 0 and the match duration, and team totals are close to 11 players times the match duration (soccer), allowing for red cards. Hockey: six on the ice (five skaters and a goalie) against nominal period lengths; a team playing short handed has less.
 * Goals: shot events with outcome goal plus own goals credited to a team equal the final score. Own goals are stored as event_type other with event_subtype 'Own Goal For' (credited to the benefiting team).
 
 ## Notes for a hockey adapter
