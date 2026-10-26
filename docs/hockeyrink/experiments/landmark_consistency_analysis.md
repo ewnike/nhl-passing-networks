@@ -1228,4 +1228,68 @@ They do not establish physical calibration accuracy or prove that landmark turno
 3. Investigate projective extrapolation and geometric conditioning.
 4. Consolidate Jaccard and correlation calculations into a reproducible Python script.
 5. Evaluate temporal calibration constraints without modifying the original independent estimates.
-6. Validate physical-coordinate accuracy before using homographies for player and puck tracking.
+6. Validate physical-coordinate accuracy before using homographies for player and puck tracking.## Experiment 04 — Stage 4D: Image-Bounded Homography Stability
+
+**Game:** Swiss National League Finals G01
+**Period:** 1
+**Sequence:** 75 consecutive frames at 25 FPS (approximately 9–12 seconds)
+**Status:** Completed image-bounds diagnostic; independent painted-line validation remains outstanding.
+
+### Objective
+
+Determine whether the negative association between consecutive RANSAC inlier-set Jaccard similarity and projected rink-geometry displacement persists after excluding reference points projected outside either image of a frame pair.
+
+### Inputs and method
+
+Stage 4D reused the 75 independently estimated homographies from Stage 4B (`dense_homographies.json`) without rerunning model inference or refitting transformations. Seven fixed rink reference points were projected through each homography: KP-20, KP-21, KP-24, KP-26, KP-30, KP-34 and KP-35. The image-bounded analysis included a reference point in a transition only when its projection was finite and inside the 1920 × 1080 image in **both** consecutive frames. Each transition's inlier-set overlap was measured with Jaccard similarity, and Pearson and Spearman correlations were calculated against the transition's mean and maximum projected displacement.
+
+Image bounds are not equivalent to a confirmed visible-ice mask or independent painted-line ground truth. The number and identities of included reference points vary by transition.
+
+### Image-bounds availability
+
+| Reference point | Frames projected inside image | Percent |
+|---|---:|---:|
+| KP-20 | 69/75 | 92.0% |
+| KP-21 | 2/75 | 2.7% |
+| KP-24 | 75/75 | 100.0% |
+| KP-26 | 75/75 | 100.0% |
+| KP-30 | 2/75 | 2.7% |
+| KP-34 | 71/75 | 94.7% |
+| KP-35 | 5/75 | 6.7% |
+
+### Results
+
+| Metric | All seven reference points (Stage 4C baseline) | Image-bounded reference points (Stage 4D) |
+|---|---:|---:|
+| Frame transitions | 74 | 74 |
+| Eligible points per transition | 7 | 3–5 |
+| Mean transition displacement | 59.820 px | 23.914 px |
+| Median transition mean displacement | 29.841 px | 12.147 px |
+| Largest individual displacement | 881.700 px | 156.305 px |
+| Pearson r: Jaccard vs mean displacement | −0.807 | −0.791 |
+| Spearman ρ: Jaccard vs mean displacement | −0.796 | −0.641 |
+| Pearson r: Jaccard vs maximum displacement | −0.757 | −0.816 |
+| Spearman ρ: Jaccard vs maximum displacement | −0.816 | −0.693 |
+
+Restricting projections to image bounds reduced the mean of transition means by approximately **60.0%** and the largest individual displacement by approximately **82.3%**. The 881.700-pixel full-set maximum was at **KP-21**, in the transition from `frame_0068.jpg` to `frame_0069.jpg`. KP-21 was projected inside the image in only 2 of 75 frames.
+
+### Interpretation
+
+1. The extreme full-set displacements are strongly affected by reference locations that are generally projected off-screen, especially southern-board locations KP-21, KP-30 and KP-35.
+2. Negative associations between Jaccard similarity and projected displacement persist after image-bounds filtering. Inlier-set continuity is therefore a potentially useful **diagnostic**, not a validated acceptance criterion.
+3. The results **do not** demonstrate that RANSAC membership turnover causes calibration error. Camera motion, landmark visibility, changing spatial support and model localization may jointly influence the observed associations.
+4. The comparison changes the reference-point sample and is therefore not a controlled estimate of the effect of filtering alone. Image-bounded points may still be outside the actual visible ice surface or geometrically misprojected.
+5. Consecutive frame transitions are temporally dependent; conventional correlation p-values, if computed, must be treated as exploratory.
+
+### Reproducibility
+
+- Existing estimator: `scripts/hockeyrink/evaluate_g01_dense_homographies.py`
+- Existing temporal analysis: `scripts/hockeyrink/analyze_g01_dense_homography_stability.py`
+- Stage 4D analysis: `scripts/hockeyrink/analyze_g01_visible_region_stability.py`
+- Input: `local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_4/dense_homographies.json`
+- Generated CSV: `local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_4/visible_region_stability.csv`
+- Version-controlled validation copy (proposed): `data/validation/g01/experiment_04/visible_region_stability.csv`
+
+### Next research step
+
+Distinguish genuine camera motion from calibration error using independently identified painted rink lines or temporally registered landmarks on actual visible ice. Do not label image-bounded displacement as ground-truth calibration error. Preserve the Stage 4B independent homographies as the unsmoothed baseline before evaluating temporal constraints.
