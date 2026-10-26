@@ -1,0 +1,17 @@
+scheme,start,outcome,possessions,share_of_start_type
+strict,open_play,turnover,44043,0.6091869761265872
+strict,open_play,censored,23456,0.32443497745442473
+strict,open_play,shot,4285,0.05926858281003624
+strict,open_play,goal,514,0.0071094636089518385
+strict,dead_ball,turnover,23051,0.5846501128668171
+strict,dead_ball,censored,12006,0.30451213635326047
+strict,dead_ball,shot,3858,0.09785172597458594
+strict,dead_ball,goal,512,0.012986024805336444
+broad,open_play,turnover,52745,0.7295499183933165
+broad,open_play,censored,14754,0.20407203518769537
+broad,open_play,shot,4285,0.05926858281003624
+broad,open_play,goal,514,0.0071094636089518385
+broad,dead_ball,turnover,28283,0.7173510538463489
+broad,dead_ball,censored,6774,0.17181119537372866
+broad,dead_ball,shot,3858,0.09785172597458594
+broad,dead_ball,goal,512,0.012986024805336444

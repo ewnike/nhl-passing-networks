@@ -1,0 +1,39 @@
+# Project configuration. All paths are relative to the repository root.
+# Change the competition or season here, then rerun scripts/01_pull_data.py.
+
+source: statsbomb
+
+statsbomb:
+  # GitHub repository that hosts the open data. The license text still names
+  # statsbomb/open-data; GitHub redirects that name to hudl/open-data.
+  repo: hudl/open-data
+  # Branch, tag, or full commit SHA. Pinning a SHA makes every teammate pull
+  # byte identical data. The pull script resolves a branch name to a SHA and
+  # records it in the manifest either way.
+  ref: 4b73468fc5b0f1950f9f66fada70ad3a4f9327cb
+  # Premier League 2015/2016: 380 matches, 20 teams, complete season.
+  competition_id: 2
+  season_id: 27
+  fetch_lineups: true
+  fetch_three_sixty: false
+  workers: 6
+  timeout_s: 60
+
+paths:
+  raw_dir: data/raw/statsbomb
+  interim_dir: data/interim
+  processed_dir: data/processed
+  manifest_dir: data/manifests
+  figures_dir: outputs/figures
+  tables_dir: outputs/tables
+
+modeling:
+  # Step 8 incremental value test. All randomness (fold assignment, bootstrap) derives from seed.
+  seed: 20261006
+  n_folds: 10
+  n_reps: 10          # repetitions of shuffled grouped K fold
+  n_boot: 2000        # paired bootstrap resamples over matches
+  # Primary analysis, fixed before looking at results (see docs/decisions.md D16).
+  primary_chain: strict_open
+  primary_scope: open_play
+  min_seq_len_grid: [1, 3, 5]

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Possnet Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"></span>
+    <div>
+      <h1>Possnet Explorer</h1>
+      <p class="sub" id="season"></p>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button role="tab" data-view="networks" aria-selected="true">Networks</button>
+    <button role="tab" data-view="zones" aria-selected="false">Zones</button>
+    <button role="tab" data-view="evidence" aria-selected="false">Evidence</button>
+  </nav>
+  <button class="icon-btn" id="theme" title="Switch light or dark" aria-label="Switch light or dark theme">
+    <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A5.8 5.8 0 0 1 10 2.5z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<main>
+<!-- NETWORKS -->
+<section id="view-networks" class="view">
+  <div class="layout">
+    <aside class="panel controls" aria-label="Match and display controls">
+      <label for="teamSel">Team</label>
+      <select id="teamSel"></select>
+      <label for="matchSel">Match</label>
+      <select id="matchSel"></select>
+      <div class="seg" id="sideSeg" role="group" aria-label="Team shown"></div>
+      <div class="seg" id="viewSeg" role="group" aria-label="View">
+        <button data-v="live" aria-pressed="true">Live play</button>
+        <button data-v="net" aria-pressed="false">Network</button>
+      </div>
+      <div class="group" data-for="live">
+        <label class="check"><input type="checkbox" id="opp" checked> Show opposing players</label>
+        <p class="hint">Opponents are estimates. The open data logs only events, never where players stand between them.</p>
+      </div>
+      <div class="group" data-for="net" hidden>
+        <label>Layout</label>
+        <div class="seg" id="layoutSeg" role="group" aria-label="Where players are placed">
+          <button data-v="assigned" aria-pressed="false" title="Textbook spot for each assigned position">Assigned</button>
+          <button data-v="blend" aria-pressed="true" title="Halfway between assigned and actual">Blend</button>
+          <button data-v="actual" aria-pressed="false" title="Average of where he touched the ball">Actual</button>
+        </div>
+        <label for="metricSel">Node size</label>
+        <select id="metricSel">
+          <option value="strength">Passes in and out</option>
+          <option value="pagerank">PageRank</option>
+          <option value="betweenness">Betweenness</option>
+          <option value="hub">HITS hub</option>
+          <option value="authority">HITS authority</option>
+          <option value="clustering">Clustering</option>
+        </select>
+        <div class="seg" id="scopeSeg" role="group" aria-label="Which passes">
+          <button data-v="open" aria-pressed="true">Open play</button>
+          <button data-v="all" aria-pressed="false">All passes</button>
+        </div>
+        <div class="seg" id="modeSeg" role="group" aria-label="Time window">
+          <button data-v="cum" aria-pressed="true">From kickoff</button>
+          <button data-v="win" aria-pressed="false">Last 15 min</button>
+        </div>
+        <label for="minW">Hide links under <output id="minWOut">1</output> passes</label>
+        <input type="range" id="minW" min="1" max="12" value="1">
+        <p class="hint">Measures use every pass. The slider only hides thin lines.</p>
+      </div>
+    </aside>
+
+    <div class="stage">
+      <div class="canvas-wrap"><canvas id="netCanvas" aria-label="Passing network on a pitch"></canvas>
+        <div class="tip" id="netTip" hidden></div>
+        <span class="pill" id="poss"></span>
+        <span class="attack">attacking <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h22M18 1l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="transport">
+        <button class="step" id="stepBack" aria-label="Previous action" title="Previous action (,)">
+          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 4h2v12H5zM16 4v12L8 10z" fill="currentColor"/></svg>
+        </button>
+        <button class="play" id="play" aria-label="Play or pause" title="Play or pause (space)">
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path id="playIcon" d="M6 3.5v13l11-6.5z" fill="currentColor"/></svg>
+        </button>
+        <button class="step" id="stepFwd" aria-label="Next action" title="Next action (.)">
+          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M13 4h2v12h-2zM4 4v12l8-6z" fill="currentColor"/></svg>
+        </button>
+        <select id="speed" aria-label="Playback speed">
+          <optgroup label="Pass by pass">
+            <option value="pbp:0.6">Slow</option><option value="pbp:1" selected>Normal</option><option value="pbp:2">Fast</option><option value="pbp:4">Fastest</option>
+          </optgroup>
+          <optgroup label="Real time">
+            <option value="rt:1">1x</option><option value="rt:5">5x</option><option value="rt:20">20x</option><option value="rt:60">60x</option>
+          </optgroup>
+        </select>
+        <div class="clock" id="clock"></div>
+      </div>
+      <canvas id="tlCanvas" tabindex="0" role="slider" aria-label="Match time" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"></canvas>
+      <p class="hint" id="how"></p>
+      <p class="hint" id="tlHint">Drag the timeline or press play. Pass by pass skips idle time so every action gets the same screen time; real time runs the clock. Goals ring the axis and shots tick it, sized by xG, with the team in view above.</p>
+    </div>
+
+    <aside class="panel readout" aria-live="polite">
+      <div class="score" id="score"></div>
+      <h3>Latest actions</h3>
+      <ul class="feed" id="feed"></ul>
+      <table class="cmp" id="cmpTable"></table>
+      <h3>Network shape</h3>
+      <table class="cmp" id="netTable"></table>
+    </aside>
+  </div>
+</section>
+
+<!-- ZONES -->
+<section id="view-zones" class="view" hidden>
+  <div class="layout">
+    <aside class="panel controls">
+      <label for="chainSel">Chain configuration</label>
+      <select id="chainSel"></select>
+      <label for="layerSel">Colour shows</label>
+      <select id="layerSel">
+        <option value="goal">Goal chance</option>
+        <option value="attempt">Shot chance</option>
+        <option value="turnover">Turnover chance</option>
+      </select>
+      <div class="seg" id="zoneMode" role="group" aria-label="Click action">
+        <button data-v="drop" aria-pressed="true">Drop balls</button>
+        <button data-v="pass" aria-pressed="false">Value a pass</button>
+      </div>
+      <div class="btnrow">
+        <button class="btn" id="drop1">Drop 1</button>
+        <button class="btn" id="drop10">Drop 10</button>
+        <button class="btn" id="drop2000">Run 2,000</button>
+      </div>
+      <button class="btn ghost" id="clearBalls">Reset tally</button>
+      <p class="hint" id="zoneHint"></p>
+    </aside>
+    <div class="stage">
+      <div class="canvas-wrap"><canvas id="zoneCanvas" aria-label="Zone values on a pitch"></canvas>
+        <div class="tip" id="zoneTip" hidden></div>
+        <span class="attack">attacking <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h22M18 1l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+      </div>
+      <p class="hint">Each square is a zone. A ball moves between zones the way real possessions did this season, until it ends in a goal, a shot or a turnover.</p>
+    </div>
+    <aside class="panel readout">
+      <h3>Where dropped balls end</h3>
+      <div id="tally"></div>
+      <h3>Pass value</h3>
+      <div id="passValue" class="muted">Choose Value a pass, then click a start zone and an end zone.</div>
+      <h3>Top players by threat added</h3>
+      <ol class="leaders" id="leaders"></ol>
+    </aside>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section id="view-evidence" class="view" hidden>
+  <div class="evidence">
+    <div class="intro">
+      <div class="intro-head">
+        <h2>Does passing structure add anything beyond shots?</h2>
+        <button type="button" class="btn ghost" id="openGlossary" aria-haspopup="dialog">Glossary</button>
+      </div>
+      <p class="takeaway lead" id="topTakeaway"></p>
+      <p id="introText"></p>
+      <aside class="care" aria-labelledby="careHead">
+        <h3 id="careHead">Read with care</h3>
+        <ul id="caveats"></ul>
+      </aside>
+    </div>
+
+    <div class="card" id="cardForest">
+      <div class="card-head">
+        <h3>Gain over the starting point</h3>
+        <div class="filters">
+          <label for="evTarget">Predict</label>
+          <select id="evTarget"></select>
+          <label for="evBase">Compare with</label>
+          <select id="evBase"></select>
+          <button type="button" class="term sub" data-term="baseline" aria-haspopup="dialog">baseline</button>
+        </div>
+      </div>
+      <p class="takeaway" id="forestTakeaway" aria-live="polite"></p>
+      <div class="legend2" id="forestLegend"></div>
+      <p class="hint scrollhint">On a narrow screen, scroll the chart sideways to see all of it, or use the table below it.</p>
+      <div id="forest" class="forest" tabindex="0" role="region" aria-label="Forest plot of every setting. Scroll sideways on a small screen."></div>
+      <p class="hint" id="forestCap"></p>
+      <p class="hint" id="forestEdge" hidden>* An interval end is within 0.0005 of zero, so a tiny change could flip this verdict.</p>
+      <details class="tablewrap">
+        <summary>Show the numbers as a table</summary>
+        <div class="scroll"><table class="data" id="forestTable"></table></div>
+      </details>
+      <details class="howto" id="howForest">
+        <summary>How to read this</summary>
+        <div class="howbody"></div>
+      </details>
+    </div>
+
+    <div class="card" id="cardWindow">
+      <div class="card-head">
+        <h3>Which minutes feed the model</h3>
+        <button type="button" class="term sub" data-term="window" aria-haspopup="dialog">window</button>
+      </div>
+      <p class="takeaway" id="winTakeaway" aria-live="polite"></p>
+      <div class="winpick" id="winSeg" role="group" aria-label="Which minutes feed the model"></div>
+      <div id="winDiagram" class="windiagram"></div>
+      <div id="winResult" class="winresult"></div>
+      <p class="note" id="winPower" hidden></p>
+      <ol class="story" id="winStory" aria-label="The story in order"></ol>
+      <details class="howto" id="howWindow">
+        <summary>How to read this</summary>
+        <div class="howbody"></div>
+      </details>
+    </div>
+
+    <div class="card" id="cardRel">
+      <div class="card-head">
+        <div class="titlewrap"><h3>See the relationship</h3><span class="tag">Exploratory</span></div>
+        <div class="filters">
+          <label for="relFeat">Feature</label>
+          <select id="relFeat"></select>
+          <label for="relBins">Groups <output id="relBinsOut">8</output></label>
+          <input type="range" id="relBins" min="4" max="12" value="8">
+        </div>
+      </div>
+      <p class="takeaway" id="relTakeaway" aria-live="polite"></p>
+      <p class="hint" id="relFeatNote"></p>
+      <div class="legend2" id="relLegend"></div>
+      <div id="relChart" class="rel"></div>
+      <div class="note" id="relNote"></div>
+      <p class="hint" id="relCorrCap"></p>
+      <div id="relCorr" class="corr"></div>
+      <details class="howto" id="howRel">
+        <summary>How to read this</summary>
+        <div class="howbody"></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<dialog id="glossary" class="drawer" aria-labelledby="glossaryTitle">
+  <div class="drawer-head">
+    <h2 id="glossaryTitle">Glossary</h2>
+    <button type="button" class="btn ghost" id="glossaryClose">Close</button>
+  </div>
+  <p class="hint">Plain meanings for the terms on the Evidence tab. Select any underlined term on the page to jump to its entry.</p>
+  <dl id="glossaryList"></dl>
+</dialog>
+</main>
+
+<footer class="foot">Data: StatsBomb open data. Built from your local files for your own use. <span id="buildInfo"></span></footer>
+
+<script src="data.js"></script>
+<script src="metrics.js"></script>
+<script src="core.js"></script>
+<script src="evidence_text.js"></script>
+<script src="glossary.js"></script>
+<script src="networks.js"></script>
+<script src="zones.js"></script>
+<script src="evidence.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
