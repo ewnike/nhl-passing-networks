@@ -1,0 +1,258 @@
+{
+  "source": "stathletes_big_data_cup",
+  "edition": "bdc_2026",
+  "repo": "bigdatacup/Big-Data-Cup-2026",
+  "release_tag": "Data",
+  "pulled_at_utc": "2026-10-26T20:46:35+00:00",
+  "cache_dir": "data/raw/stathletes/bdc_2026",
+  "games_listed": 10,
+  "games_pulled": 10,
+  "tracking_fetched": false,
+  "games": [
+    {
+      "name": "2025-10-11 Team A @ Team D",
+      "date": "2025-10-11",
+      "away_team": "Team A",
+      "home_team": "Team D",
+      "goalie_team_on_right_p1": "Away",
+      "game_id": "2025-10-11_TeamA_at_TeamD",
+      "event_rows": 1878,
+      "shift_rows": 748,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-10-17 Team F @ Team L",
+      "date": "2025-10-17",
+      "away_team": "Team F",
+      "home_team": "Team L",
+      "goalie_team_on_right_p1": "Home",
+      "game_id": "2025-10-17_TeamF_at_TeamL",
+      "event_rows": 1931,
+      "shift_rows": 759,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-10-24 Team B @ Team A",
+      "date": "2025-10-24",
+      "away_team": "Team B",
+      "home_team": "Team A",
+      "goalie_team_on_right_p1": "Home",
+      "game_id": "2025-10-24_TeamB_at_TeamA",
+      "event_rows": 1949,
+      "shift_rows": 907,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-10-24 Team E @ Team D",
+      "date": "2025-10-24",
+      "away_team": "Team E",
+      "home_team": "Team D",
+      "goalie_team_on_right_p1": "Away",
+      "game_id": "2025-10-24_TeamE_at_TeamD",
+      "event_rows": 1914,
+      "shift_rows": 722,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-10-28 Team C @ Team A",
+      "date": "2025-10-28",
+      "away_team": "Team C",
+      "home_team": "Team A",
+      "goalie_team_on_right_p1": "Home",
+      "game_id": "2025-10-28_TeamC_at_TeamA",
+      "event_rows": 1943,
+      "shift_rows": 731,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-10-29 Team G @ Team L",
+      "date": "2025-10-29",
+      "away_team": "Team G",
+      "home_team": "Team L",
+      "goalie_team_on_right_p1": "Home",
+      "game_id": "2025-10-29_TeamG_at_TeamL",
+      "event_rows": 1878,
+      "shift_rows": 925,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-11-02 Team D @ Team A",
+      "date": "2025-11-02",
+      "away_team": "Team D",
+      "home_team": "Team A",
+      "goalie_team_on_right_p1": "Home",
+      "game_id": "2025-11-02_TeamD_at_TeamA",
+      "event_rows": 1860,
+      "shift_rows": 715,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-11-16 Team H @ Team K",
+      "date": "2025-11-16",
+      "away_team": "Team H",
+      "home_team": "Team K",
+      "goalie_team_on_right_p1": "Away",
+      "game_id": "2025-11-16_TeamH_at_TeamK",
+      "event_rows": 1963,
+      "shift_rows": 847,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-11-19 Team I @ Team K",
+      "date": "2025-11-19",
+      "away_team": "Team I",
+      "home_team": "Team K",
+      "goalie_team_on_right_p1": "Away",
+      "game_id": "2025-11-19_TeamI_at_TeamK",
+      "event_rows": 1933,
+      "shift_rows": 780,
+      "tracking_periods": []
+    },
+    {
+      "name": "2025-11-28 Team J @ Team K",
+      "date": "2025-11-28",
+      "away_team": "Team J",
+      "home_team": "Team K",
+      "goalie_team_on_right_p1": "Away",
+      "game_id": "2025-11-28_TeamJ_at_TeamK",
+      "event_rows": 1951,
+      "shift_rows": 727,
+      "tracking_periods": []
+    }
+  ],
+  "license": {
+    "agreement_url": "https://github.com/bigdatacup/Big-Data-Cup-2026/blob/main/legal.md",
+    "terms_summary": "Stathletes Public Data User Agreement: research produced from the data may be shared publicly provided it is not used for profit. The agreement text says nothing about redistributing the data itself, so the raw files are treated as not redistributable.",
+    "redistribution_allowed": false
+  },
+  "changed_since_previous_manifest": [],
+  "files": [
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-11.Team.A.@.Team.D.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-11.Team.A.@.Team.D.Events.csv",
+      "sha256": "36a9728df4f4c4988e5077a3c6dfb8ba7c570b5e52444f879d2d977e9b131ab7",
+      "bytes": 172284
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-11.Team.A.@.Team.D.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-11.Team.A.@.Team.D.Shifts.csv",
+      "sha256": "69f5b6a8875900cb644f802007297f238ef000e7316ceceb8013f1ddf8089265",
+      "bytes": 43823
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-17.Team.F.@.Team.L.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-17.Team.F.@.Team.L.Events.csv",
+      "sha256": "b6a26edbbd235328041e8338ba5737a485d5490644e0a4e41f7598b374975f15",
+      "bytes": 176937
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-17.Team.F.@.Team.L.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-17.Team.F.@.Team.L.Shifts.csv",
+      "sha256": "693a894ca1960fc720c70a0e4319a0627407edc865d2a6eef288e98f6210d8fd",
+      "bytes": 44401
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-24.Team.B.@.Team.A.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-24.Team.B.@.Team.A.Events.csv",
+      "sha256": "7c27ebc2478d3afcb8f8f7e8bc64e434b6ecda8a472477f7796fe5d879d1666f",
+      "bytes": 178529
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-24.Team.B.@.Team.A.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-24.Team.B.@.Team.A.Shifts.csv",
+      "sha256": "7b5e79767d0d6a6e12582c1ca16149b7bc08fede8d508e4d2cb79e0671765476",
+      "bytes": 53235
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-24.Team.E.@.Team.D.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-24.Team.E.@.Team.D.Events.csv",
+      "sha256": "45d162c4d1a9241699f71ce65e8b360afee4809e9e8f25ea9f5fb56e8445dfb3",
+      "bytes": 175219
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-24.Team.E.@.Team.D.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-24.Team.E.@.Team.D.Shifts.csv",
+      "sha256": "da4abff2e3f3b713d4d8fe03471b43dba2a60b515cd15dd1456815958920d1c9",
+      "bytes": 42259
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-28.Team.C.@.Team.A.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-28.Team.C.@.Team.A.Events.csv",
+      "sha256": "d22dfd636d04e8ee581c59183bbfa34c422d00ba7192822591c03cf9001032cc",
+      "bytes": 177685
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-28.Team.C.@.Team.A.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-28.Team.C.@.Team.A.Shifts.csv",
+      "sha256": "6de682dc7304d3039c73201daddabf50a291949adda753fe6e5f2e63997d6378",
+      "bytes": 42821
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-29.Team.G.@.Team.L.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-29.Team.G.@.Team.L.Events.csv",
+      "sha256": "e351f5010ff9c4434de490de0b3f9ddc81f2e0b712a4e6341c5c9a4361ecd9ce",
+      "bytes": 171722
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-10-29.Team.G.@.Team.L.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-10-29.Team.G.@.Team.L.Shifts.csv",
+      "sha256": "b433f3bd8c4f3be1cf74ef96b95bee6fa3c4c8c5512864e949d4c5e693e21285",
+      "bytes": 54190
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-02.Team.D.@.Team.A.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-02.Team.D.@.Team.A.Events.csv",
+      "sha256": "5a413d1c799d040b5e80debc178053ce0e6b6472354900d5dc1255059e5265d1",
+      "bytes": 169954
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-02.Team.D.@.Team.A.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-02.Team.D.@.Team.A.Shifts.csv",
+      "sha256": "257966d57aedafd90f6f389bfef1fe8287cc2cb6357f5a945562e6c0fcda5ba3",
+      "bytes": 41892
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-16.Team.H.@.Team.K.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-16.Team.H.@.Team.K.Events.csv",
+      "sha256": "1e0c57fbf142b687a4ca69f715e97324380e0813d07967a1b58eb17db8654b55",
+      "bytes": 179635
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-16.Team.H.@.Team.K.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-16.Team.H.@.Team.K.Shifts.csv",
+      "sha256": "a634f7c6125d2fe111aa9fdaf5593dc50fcd1500e34b76fad1ed9ea26f49c974",
+      "bytes": 49579
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-19.Team.I.@.Team.K.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-19.Team.I.@.Team.K.Events.csv",
+      "sha256": "076ee0bec327ba8ee0c4e9d6abf518d28b6ab9b4341a4f522089972ab3950087",
+      "bytes": 176279
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-19.Team.I.@.Team.K.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-19.Team.I.@.Team.K.Shifts.csv",
+      "sha256": "c9a709b79a0f22f9a97611b1f15334fb45d6414021801bd830fbb32d8e84ad21",
+      "bytes": 45641
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-28.Team.J.@.Team.K.Events.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-28.Team.J.@.Team.K.Events.csv",
+      "sha256": "3fe466d4273da466cdb377bb7b0c97b9511b67a4cb7895ab07ea6b51e715cf93",
+      "bytes": 177537
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/2025-11-28.Team.J.@.Team.K.Shifts.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/2025-11-28.Team.J.@.Team.K.Shifts.csv",
+      "sha256": "7137be5fea7679e724b014ab3de6f668ec75829f9e7ac78253b49cef2a50a0f3",
+      "bytes": 42532
+    },
+    {
+      "path": "data/raw/stathletes/bdc_2026/camera_orientations.csv",
+      "url": "https://github.com/bigdatacup/Big-Data-Cup-2026/releases/download/Data/camera_orientations.csv",
+      "sha256": "8b5013ee66a6c6fd855759639811a6c0750ed374cccf02d240ffe702a3bfb937",
+      "bytes": 371
+    }
+  ],
+  "failures": {}
+}
