@@ -1228,7 +1228,11 @@ They do not establish physical calibration accuracy or prove that landmark turno
 3. Investigate projective extrapolation and geometric conditioning.
 4. Consolidate Jaccard and correlation calculations into a reproducible Python script.
 5. Evaluate temporal calibration constraints without modifying the original independent estimates.
-6. Validate physical-coordinate accuracy before using homographies for player and puck tracking.## Experiment 04 — Stage 4D: Image-Bounded Homography Stability
+6. Validate physical-coordinate accuracy before using homographies for player and puck tracking.
+
+---
+
+## Experiment 04 — Stage 4D: Image-Bounded Homography Stability
 
 **Game:** Swiss National League Finals G01
 **Period:** 1
@@ -1289,6 +1293,139 @@ Restricting projections to image bounds reduced the mean of transition means by 
 - Input: `local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_4/dense_homographies.json`
 - Generated CSV: `local_artifacts/flohockey/swiss_nl_2026_finals/G01/homography_experiment_04/stage_4/visible_region_stability.csv`
 - Version-controlled validation copy (proposed): `data/validation/g01/experiment_04/visible_region_stability.csv`
+
+---
+
+# Experiment 04 — Final Findings and Research Conclusions
+
+**Date completed:** 2026-10-25
+**Game:** Swiss National League Finals — G01
+**Period:** 1
+**Dataset:** 75 consecutive frames sampled at 25 FPS
+**Video interval:** Approximately 9–12 seconds
+**Status:** COMPLETE — Exploratory temporal homography evaluation
+
+## Research Objective
+
+Evaluate the temporal consistency of independently estimated rink homographies during continuous broadcast-camera movement.
+
+The experiment investigated landmark detection stability, RANSAC inlier membership, spatial projection variation, and the relationship between landmark-selection continuity and estimated rink geometry.
+
+## Summary of Experimental Results
+
+| Measurement | Result |
+|---|---:|
+| Frames analyzed | 75 |
+| Consecutive frame transitions | 74 |
+| Successful homography estimates | 75 (100%) |
+| Mean RANSAC inlier reprojection error | 1.099 px |
+| Mean projected displacement, full reference set | 59.820 px |
+| Mean projected displacement, image-bounded set | 23.914 px |
+| Maximum projected displacement, full reference set | 881.700 px |
+| Maximum projected displacement, image-bounded set | 156.305 px |
+| Mean RANSAC inlier-set Jaccard similarity | 0.764 |
+| Median RANSAC inlier-set Jaccard similarity | 0.857 |
+
+Restricting the analysis to reference points projected inside both consecutive images reduced mean projected displacement by approximately 60.0%.
+
+The maximum observed displacement decreased by approximately 82.3%.
+
+These reductions demonstrate that off-screen projections contributed substantially to the extreme displacement measurements.
+
+They do not establish that the remaining displacement represents calibration error.
+
+## Correlation Results
+
+| Measurement | Pearson r | Spearman ρ |
+|---|---:|---:|
+| Full reference set — mean displacement | −0.807 | −0.796 |
+| Full reference set — maximum displacement | −0.757 | −0.816 |
+| Image-bounded set — mean displacement | −0.791 | −0.641 |
+| Image-bounded set — maximum displacement | −0.816 | −0.693 |
+
+Strong negative associations persisted after restricting measurements to image-bounded reference points.
+
+Transitions with lower RANSAC inlier-set similarity generally exhibited larger changes in projected rink geometry.
+
+This identifies Jaccard similarity as a potentially useful diagnostic for temporal calibration monitoring.
+
+However, the analysis does not establish that changes in RANSAC membership cause inaccurate homographies.
+
+## Camera Motion Versus Calibration Error
+
+Visual inspection of the dense sequence showed continuous broadcast-camera movement without an obvious camera cut.
+
+Genuine camera motion changes the image positions of stationary rink landmarks.
+
+Consequently, image-space displacement between homographies cannot independently distinguish camera movement from calibration error.
+
+The Stage 4C and Stage 4D measurements quantify variation in projected geometry, not ground-truth calibration accuracy.
+
+Independent painted-line validation from Experiment 04 Stage 3B demonstrated geometric misalignment in the original 1-FPS pilot, but those measurements concern a different frame sequence.
+
+They cannot be used as independent validation of all 75 dense-sequence homographies.
+
+## Sampling Methodology
+
+The initial temporal investigation used frames `0009`, `0010`, and `0011` from a 1-FPS pilot.
+
+Those observations were approximately one second apart, corresponding to approximately 25 source-video frames between samples.
+
+This spacing was useful for evaluating homography behavior across changing camera views but insufficient for assessing consecutive-source-frame stability.
+
+The dense experiment therefore used 75 consecutive frames sampled at 25 FPS, providing approximately 40 milliseconds between observations.
+
+The two datasets must remain distinguished because similarly numbered files represent different video timestamps.
+
+## Scientific Conclusions
+
+Experiment 04 established that:
+
+1. HockeyRink predictions and RANSAC produced homography estimates for all 75 dense-sequence frames.
+2. Low inlier reprojection errors did not guarantee small changes in projected rink geometry.
+3. Off-screen extrapolation substantially amplified measured projection variation.
+4. RANSAC inlier-set continuity was generally high but occasionally changed abruptly.
+5. Strong negative associations existed between inlier-set Jaccard similarity and projected geometric displacement.
+6. These associations persisted after restricting the analysis to image-bounded reference points.
+7. Projected displacement alone could not distinguish genuine camera motion from calibration error.
+
+These findings support using landmark-membership continuity as one component of a future calibration-quality monitoring system.
+
+They do not establish an acceptable Jaccard threshold, guarantee physical-coordinate accuracy, or demonstrate that temporal smoothing would improve calibration.
+
+## Remaining Validation Requirements
+
+Future research should investigate:
+
+1. Independent painted-line alignment across multiple consecutive dense frames.
+2. Temporal consistency of image-to-rink transformations at independently observed stationary rink locations.
+3. Numerical conditioning and spatial distribution of homography correspondences.
+4. Changes in the projective denominator near extrapolated rink boundaries.
+5. Camera cuts, close-ups, and other broadcast-view transitions.
+6. The effect of temporal constraints on calibration accuracy.
+7. Calibration performance across longer video intervals and additional games.
+
+## Experiment 05 — Recommended Scope
+
+Experiment 05 should evaluate homography estimation across the original 60-frame, 1-FPS pilot.
+
+Its primary objective should be calibration coverage and robustness across changing broadcast views, rather than consecutive-source-frame temporal stability.
+
+The evaluation should distinguish wide-angle gameplay, camera transitions, close-ups, insufficient landmark coverage, and failed or geometrically questionable homographies.
+
+Where temporal stability is investigated, consecutive source-video frames should be used rather than interpreting the 1-FPS samples as adjacent source frames.
+
+## Final Status
+
+**Experiment 04: COMPLETE**
+
+**Stages 4A–4D: COMPLETE**
+
+**Exploratory findings documented and reproducibility artifacts preserved.**
+
+**Independent dense-sequence calibration accuracy: NOT YET ESTABLISHED.**
+
+**Next experiment: Experiment 05 — Full Pilot-Sequence Evaluation.**
 
 ### Next research step
 
