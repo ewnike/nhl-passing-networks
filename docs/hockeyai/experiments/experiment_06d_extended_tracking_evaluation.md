@@ -236,3 +236,127 @@ Independent visual identity validation remains necessary before claiming improve
 **Stage 6D3: PLANNED**
 
 **Physical player identity accuracy: NOT YET ESTABLISHED**
+
+---
+
+## 12. AWS S3 Archival and Integrity Verification
+
+**Archive date:** 2026-10-29
+**Experiment:** G01 — Experiment 06D2
+**Archive status:** COMPLETE — SHA-256 VERIFIED
+
+### 12.1 Research Objective
+
+Preserve the original Experiment 06D2 tracking outputs in AWS S3 before conducting additional experiments involving camera-cut-aware tracking, tracker configuration changes, or appearance-based reidentification.
+
+Establish an independently verifiable baseline that can be restored and compared against subsequent experimental results.
+
+### 12.2 Archive Location
+
+**AWS S3 bucket:**
+
+`ewnike-nhl-passing-networks-2026`
+
+**Archive prefix:**
+
+`experiments/swiss_nl_2026_finals/G01/experiment_06/stage_6d2/full_broadcast_baseline/`
+
+The archive preserves the original Stage 6D2 output directory structure.
+
+### 12.3 Archived Artifacts
+
+The archive contains 755 objects:
+
+- 750 annotated tracking frames.
+- `tracks.json`
+- `track_observations.csv`
+- `track_summary.csv`
+- `tracking_metadata.json`
+- `botsort_config.yaml`
+
+**Total archived size:** 391,755,263 bytes (approximately 373.6 MiB).
+
+The original source footage, model weights, and local experimental outputs were not modified during archival.
+
+The experiment's Python implementation and research documentation are preserved separately in Git.
+
+### 12.4 SHA-256 Manifest
+
+A SHA-256 checksum manifest was generated for all 755 local baseline files.
+
+**Local manifest:**
+
+`local_artifacts/hockeyai_test/swiss_nl_2026_finals/G01/experiment_06/stage_6d/stage_6d2_sha256_manifest.txt`
+
+**S3 manifest:**
+
+`experiments/swiss_nl_2026_finals/G01/experiment_06/stage_6d2/stage_6d2_sha256_manifest.txt`
+
+The manifest contains 755 entries, each associating a relative file path with its SHA-256 digest.
+
+The manifest is stored outside the baseline archive prefix so that the verified 755-object inventory remains unchanged.
+
+### 12.5 Integrity Verification Procedure
+
+The following verification steps were performed:
+
+1. Uploaded the baseline directory to AWS S3.
+2. Compared local file counts against the S3 object inventory.
+3. Confirmed that a subsequent AWS CLI synchronization dry run reported no pending transfers.
+4. Generated SHA-256 checksums for the 755 local files.
+5. Performed local checksum verification.
+6. Independently streamed all 755 archived S3 objects and recalculated their SHA-256 checksums.
+7. Compared every remote checksum against the local manifest.
+8. Uploaded the checksum manifest separately to S3.
+
+Remote verification was performed using:
+
+`scripts/aws/verify_experiment_06d2_s3.py`
+
+The verification procedure did not modify the archived S3 objects or the local experimental files.
+
+### 12.6 Verification Results
+
+| Verification metric | Result |
+|---|---:|
+| Expected baseline objects | 755 |
+| S3 baseline objects | 755 |
+| Inventory comparison | PASS |
+| SHA-256 checksums verified | 755 |
+| SHA-256 mismatches | 0 |
+| Missing S3 objects | 0 |
+| Unexpected S3 objects | 0 |
+| Remote SHA-256 integrity | PASS |
+| Checksum manifest uploaded | YES |
+
+**Verification conclusion:**
+
+All 755 archived S3 objects matched the SHA-256 fingerprints recorded in the local manifest at the time of verification.
+
+This establishes byte-for-byte integrity of the archived Experiment 06D2 baseline relative to the checksum manifest.
+
+### 12.7 Preservation Limitations
+
+Successful checksum verification establishes the integrity of the archived objects at the time of testing.
+
+It does not independently establish permanent immutability, future availability, or protection against accidental deletion.
+
+Long-term archival protection depends on the AWS S3 bucket's versioning, access controls, retention policies, and backup configuration.
+
+These controls were not evaluated as part of this verification.
+
+### 12.8 Research Status
+
+**Experiment 06D2 tracking baseline: COMPLETE**
+
+**GitHub code and documentation preservation: COMPLETE**
+
+**AWS S3 baseline upload: COMPLETE**
+
+**Remote SHA-256 integrity verification: PASS**
+
+**SHA-256 manifest archival: COMPLETE**
+
+**Experiment 06D3 camera-cut-aware tracking comparison: PENDING**
+
+The preserved Experiment 06D2 baseline will serve as the reference for subsequent tracking experiments.
