@@ -360,3 +360,155 @@ These controls were not evaluated as part of this verification.
 **Experiment 06D3 camera-cut-aware tracking comparison: PENDING**
 
 The preserved Experiment 06D2 baseline will serve as the reference for subsequent tracking experiments.
+
+---
+
+## 13. Stage 6D3 — Camera-Cut-Aware Tracking Comparison
+
+**Date:** 2026-10-29
+**Status:** Quantitative evaluation complete; physical player identity validation pending.
+
+### 13.1 Research Objective
+
+Evaluate whether initializing independent BoT-SORT tracking sessions at confirmed broadcast camera cuts improves immediate tracking-observation availability without materially changing tracking outputs during continuous-camera segments.
+
+Compare the preserved Stage 6D2 persistent-tracker baseline against Stage 6D3 using identical source frames, HockeyAI model weights, inference parameters, and BoT-SORT configuration.
+
+### 13.2 Experimental Configuration
+
+Both experiments processed the same 750 consecutive frames from G01 Period 1, corresponding to video time 300–330 seconds.
+
+| Parameter | Stage 6D2 | Stage 6D3 |
+|---|---|---|
+| Frames | 750 | 750 |
+| Model | HockeyAI | HockeyAI |
+| Tracker | BoT-SORT | BoT-SORT |
+| Confidence threshold | 0.15 | 0.15 |
+| Image size | 1280 | 1280 |
+| Device | CPU | CPU |
+| Appearance ReID | Disabled | Disabled |
+| Tracker persistence | Entire sequence | Within camera segments |
+| Camera-cut resets | Disabled | Enabled |
+
+Stage 6D3 created independent YOLO/BoT-SORT tracking sessions at frames 0000, 0133, and 0271.
+
+The camera segments were:
+
+- Segment A: frames 0000–0132
+- Segment B: frames 0133–0270
+- Segment C: frames 0271–0749
+
+Segment-qualified track identifiers were introduced to prevent numerical track-ID collisions across independent sessions.
+
+### 13.3 Tracking Results
+
+| Metric | Stage 6D2 | Stage 6D3 | Difference |
+|---|---:|---:|---:|
+| Frames processed | 750 | 750 | 0 |
+| Track observations | 6,482 | 6,495 | +13 |
+| Unique track identities | 86 | 86 | 0 |
+| Processing time | 171.52 s | 168.06 s | −3.46 s |
+| Longest track | 478 frames | 479 frames | +1 |
+
+The reset-aware experiment produced 13 additional observations, representing approximately 0.20% more observations than the persistent baseline.
+
+Runtime differences were not evaluated through repeated trials and should not be interpreted as evidence of improved processing efficiency.
+
+### 13.4 Camera-Cut Recovery
+
+Frame-level comparison established that all 13 additional observations occurred at the two confirmed camera-cut frames.
+
+| Camera-cut frame | Stage 6D2 | Stage 6D3 | Difference |
+|---|---:|---:|---:|
+| 0133 | 0 | 3 | +3 |
+| 0271 | 0 | 10 | +10 |
+| **Total** | **0** | **13** | **+13** |
+
+No differences in observation counts were found across the remaining 748 frames.
+
+The results demonstrate that independent tracking-session initialization eliminated the immediate post-cut observation gaps observed in Stage 6D2.
+
+### 13.5 Bounding-Box Agreement
+
+A read-only spatial comparison was performed using the saved tracking CSV files from both experiments.
+
+The diagnostic excluded camera-cut frames 0133 and 0271.
+
+Bounding boxes were matched within each frame using class-constrained, one-to-one assignment based on Intersection over Union (IoU).
+
+A minimum IoU threshold of 0.50 was required for a valid match.
+
+Results:
+
+| Metric | Result |
+|---|---:|
+| Frames evaluated | 748 |
+| Matched bounding-box pairs | 6,482 |
+| Unmatched observations | 0 |
+| Frames with unmatched observations | 0 |
+| Mean matched IoU | 0.999909 |
+| Median matched IoU | 1.000000 |
+| Minimum matched IoU | 0.974613 |
+
+All observations outside the two camera-cut frames were successfully matched.
+
+The mean matched IoU was approximately 0.9999, indicating near-identical bounding-box geometry between the two experiments.
+
+These results establish strong spatial agreement but do not independently establish track-ID correspondence or physical player identity accuracy.
+
+### 13.6 Interpretation
+
+The comparison supports the conclusion that initializing independent tracking sessions at confirmed camera cuts can eliminate immediate post-cut observation gaps.
+
+In this experiment, the reset-aware implementation recovered 13 observations without changing per-frame observation counts elsewhere.
+
+Spatial agreement outside the camera-cut frames was exceptionally high.
+
+The results support camera-cut-aware tracking initialization as a practical pipeline design choice for broadcast hockey footage.
+
+However, the experiment does not establish improved physical player identity consistency or reduced identity-switch frequency.
+
+### 13.7 Limitations
+
+1. The comparison evaluated one 30-second broadcast interval containing two confirmed camera cuts.
+2. Bounding-box matching does not establish physical player identity.
+3. No ground-truth identity annotations were available for the full sequence.
+4. Stage 6D3 used fresh YOLO model instances rather than directly resetting existing tracker objects.
+5. Runtime differences were not evaluated through repeated trials.
+6. Results may differ under other camera transitions, lighting conditions, and gameplay situations.
+7. No puck-possession or passing-event accuracy was evaluated.
+
+### 13.8 Reproducibility
+
+**Stage 6D3 script:**
+
+`scripts/hockeyai/run_g01_botsort_experiment_06d3.py`
+
+**Stage 6D3 output directory:**
+
+`local_artifacts/hockeyai_test/swiss_nl_2026_finals/G01/experiment_06/stage_6d/camera_cut_aware_baseline/`
+
+Generated artifacts include:
+
+- `tracks.json`
+- `track_observations.csv`
+- `track_summary.csv`
+- `tracking_metadata.json`
+- `botsort_config.yaml`
+- `annotated_frames/`
+
+The original Stage 6D2 baseline remains preserved separately and was not modified.
+
+### 13.9 Research Status
+
+**Stage 6D3 execution: COMPLETE**
+
+**Camera-cut recovery comparison: COMPLETE**
+
+**Bounding-box spatial agreement: VERIFIED**
+
+**Physical player identity accuracy: NOT YET ESTABLISHED**
+
+**Stage 6D3 archival preservation: PENDING**
+
+**Stage 6D4 extended identity validation: PLANNED**
