@@ -39,3 +39,4 @@ sample_data/manifests/
 
 # Explorer data holds match level rows derived from licensed data: local use only.
 app/data.js
+app/data_*.js

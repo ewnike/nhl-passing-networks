@@ -69,6 +69,28 @@ def match_durations_s(events: pd.DataFrame) -> pd.Series:
     return per_period.groupby("match_id").sum()
 
 
+def expected_duration_s(matches: pd.DataFrame, events: pd.DataFrame) -> pd.Series:
+    """Match duration in seconds per match, sport aware.
+
+    Soccer uses the event clocks (see ``match_durations_s``). Hockey uses nominal period
+    lengths, because the last event in a period is rarely at the final second while shifts
+    run to the horn: 1200 s for periods 1 to 3 and 300 s for a regular season overtime.
+    """
+    duration = match_durations_s(events).astype(float)
+    hockey_ids = matches.loc[matches["sport"] == "hockey", "match_id"]
+    if len(hockey_ids):
+        h = events[events["match_id"].isin(hockey_ids) & (events["period"] <= 4)]
+        per = h.groupby(["match_id", "period"])["period_time_s"].max().reset_index()
+        regulation = per["period"] <= 3
+        per["nominal"] = np.where(
+            regulation, c.HOCKEY_REGULATION_PERIOD_S,
+            np.where(per["period_time_s"] <= c.HOCKEY_OVERTIME_PERIOD_S,
+                     c.HOCKEY_OVERTIME_PERIOD_S, c.HOCKEY_REGULATION_PERIOD_S),
+        )
+        duration.loc[per["match_id"].unique()] = per.groupby("match_id")["nominal"].sum()
+    return duration
+
+
 def _res(name: str, severity: str, n_checked: int, failing: int, detail: str = "") -> CheckResult:
     return CheckResult(name, severity, int(n_checked), int(failing), detail)
 
@@ -159,7 +181,10 @@ def check_coordinates(matches: pd.DataFrame, events: pd.DataFrame) -> list[Check
     miss_start = (located & (events["x_start"].isna() | events["y_start"].isna())).sum()
     results.append(_res("events.located_types_have_start", "error", int(located.sum()),
                         miss_start))
-    end_needed = events["event_type"].isin(c.END_LOCATED_EVENT_TYPES)
+    sport = events["match_id"].map(matches.set_index("match_id")["sport"]).fillna("soccer")
+    end_needed = pd.Series(False, index=events.index)
+    for sport_name, types in c.END_LOCATED_BY_SPORT.items():
+        end_needed |= (sport == sport_name) & events["event_type"].isin(types)
     miss_end = (end_needed & (events["x_end"].isna() | events["y_end"].isna())).sum()
     results.append(_res("events.end_types_have_end", "error", int(end_needed.sum()), miss_end))
 
@@ -175,12 +200,26 @@ def check_coordinates(matches: pd.DataFrame, events: pd.DataFrame) -> list[Check
     return results
 
 
-def check_passes(events: pd.DataFrame, appearances: pd.DataFrame) -> list[CheckResult]:
+def check_passes(
+    events: pd.DataFrame, appearances: pd.DataFrame, matches: pd.DataFrame | None = None
+) -> list[CheckResult]:
     results = []
     passes = events[events["event_type"] == "pass"]
     complete = passes[passes["outcome"] == "complete"]
-    results.append(_res("passes.complete_have_recipient", "error", len(complete),
-                        complete["recipient_id"].isna().sum()))
+    if matches is None:
+        hockey_pass = pd.Series(False, index=complete.index)
+    else:
+        sport = complete["match_id"].map(matches.set_index("match_id")["sport"])
+        hockey_pass = sport == "hockey"
+    results.append(_res("passes.complete_have_recipient", "error", int((~hockey_pass).sum()),
+                        complete.loc[~hockey_pass, "recipient_id"].isna().sum()))
+    if hockey_pass.any():
+        results.append(_res(
+            "passes.complete_have_recipient_hockey", "warn", int(hockey_pass.sum()),
+            complete.loc[hockey_pass, "recipient_id"].isna().sum(),
+            "Source gap: some complete passes have no recorded receiver. They cannot become "
+            "network edges.",
+        ))
     self_pass = (complete["recipient_id"] == complete["player_id"]).sum()
     results.append(_res("passes.recipient_not_passer", "error", len(complete), self_pass))
     rec = complete.dropna(subset=["recipient_id"])[["match_id", "team_id", "recipient_id"]]
@@ -215,25 +254,42 @@ def check_possessions(events: pd.DataFrame) -> list[CheckResult]:
 def check_minutes(matches: pd.DataFrame, events: pd.DataFrame, appearances: pd.DataFrame
                   ) -> list[CheckResult]:
     results = []
-    dur = match_durations_s(events).rename("duration_s") / 60.0
+    dur = expected_duration_s(matches, events).rename("duration_s") / 60.0
     a = appearances.merge(dur, left_on="match_id", right_index=True, how="left")
+    a["sport"] = a["match_id"].map(matches.set_index("match_id")["sport"]).fillna("soccer")
     bad = ((a["minutes_played"] < 0) | (a["minutes_played"] > a["duration_s"] + 1.0)).sum()
     results.append(_res("appearances.minutes_in_range", "error", len(a), bad))
-    starters = a[a["started"]]
-    per_team = starters.groupby(["match_id", "team_id"]).size()
-    results.append(_res("appearances.eleven_starters", "error", len(per_team),
-                        (per_team != 11).sum()))
-    totals = a.groupby(["match_id", "team_id"]).agg(
-        total=("minutes_played", "sum"), duration=("duration_s", "first")
-    )
-    signed = (totals["total"] - 11 * totals["duration"]) / (11 * totals["duration"])
-    results.append(_res("appearances.team_minutes_not_above_11_x_duration", "error",
-                        len(totals), (signed > 0.002).sum()))
-    worst = float(signed.min()) if len(signed) else 0.0
-    results.append(_res(
-        "appearances.team_minutes_shortfall", "warn", len(totals), (signed < -0.003).sum(),
-        f"worst shortfall {worst:.3f}; expected only where a player was sent off",
-    ))
+    for sport in ("soccer", "hockey"):
+        part = a[a["sport"] == sport]
+        if part.empty:
+            continue
+        n = c.ON_SURFACE_PER_TEAM[sport]
+        soccer = sport == "soccer"
+        per_team = part[part["started"]].groupby(["match_id", "team_id"]).size()
+        results.append(_res(
+            "appearances.eleven_starters" if soccer else "appearances.six_starters",
+            "error" if soccer else "warn", len(per_team), (per_team != n).sum(),
+            "" if soccer else "Five skaters and a goalie are expected to start.",
+        ))
+        totals = part.groupby(["match_id", "team_id"]).agg(
+            total=("minutes_played", "sum"), duration=("duration_s", "first")
+        )
+        signed = (totals["total"] - n * totals["duration"]) / (n * totals["duration"])
+        results.append(_res(f"appearances.team_minutes_not_above_{n}_x_duration", "error",
+                            len(totals), (signed > 0.002).sum()))
+        worst = float(signed.min()) if len(signed) else 0.0
+        # Hockey teams are short handed during penalties, so a few percent below six
+        # players is normal. Flag only a large gap, which points at missing shift data.
+        floor = -0.003 if soccer else -0.2
+        results.append(_res(
+            "appearances.team_minutes_shortfall" if soccer
+            else "appearances.team_minutes_shortfall_hockey",
+            "warn", len(totals), (signed < floor).sum(),
+            f"worst shortfall {worst:.3f}; expected only where a player was sent off"
+            if soccer else
+            f"worst shortfall {worst:.3f}; a penalty kill legitimately has fewer than six "
+            "on the ice, so only a gap beyond 0.2 is flagged",
+        ))
     return results
 
 
@@ -265,7 +321,7 @@ def validate_tables(
         lambda: check_event_ordering(events),
         lambda: check_referential(matches, events, appearances),
         lambda: check_coordinates(matches, events),
-        lambda: check_passes(events, appearances),
+        lambda: check_passes(events, appearances, matches),
         lambda: check_possessions(events),
         lambda: check_minutes(matches, events, appearances),
         lambda: check_goals(matches, events),

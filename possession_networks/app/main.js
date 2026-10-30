@@ -4,7 +4,7 @@
   const App = window.App, $ = App.$;
   const names = ["networks", "zones", "evidence"];
   $("#season").textContent = App.data.meta.season + "  |  " + App.data.meta.source;
-  $("#buildInfo").textContent = App.data.matches.length + " matches";
+  $("#buildInfo").textContent = App.data.matches.length + " " + (App.data.meta.unit || "matches");
 
   function show(name) {
     if (!names.includes(name)) name = "networks";
