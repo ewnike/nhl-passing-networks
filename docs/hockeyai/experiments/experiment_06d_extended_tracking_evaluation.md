@@ -512,3 +512,68 @@ The original Stage 6D2 baseline remains preserved separately and was not modifie
 **Stage 6D3 archival preservation: PENDING**
 
 **Stage 6D4 extended identity validation: PLANNED**
+
+## 14. Stage 6D3 — AWS S3 Archival and Integrity Verification
+
+**Archive date:** 2026-10-30
+**Experiment:** G01 — Stage 6D3
+**Status:** COMPLETE — SHA-256 VERIFIED
+
+### 14.1 Archive Location
+
+The camera-cut-aware BoT-SORT tracking baseline was archived in AWS S3 to preserve the original experimental outputs for reproducibility and comparison with Stage 6D2.
+
+**S3 bucket:** `ewnike-nhl-passing-networks-2026`
+
+**Archive prefix:**
+
+`experiments/swiss_nl_2026_finals/G01/experiment_06/stage_6d3/camera_cut_aware_baseline/`
+
+The archive contains **755 objects totaling 388,203,674 bytes**, including 750 annotated frames and five tracking, configuration, and metadata files.
+
+### 14.2 SHA-256 Integrity Verification
+
+A SHA-256 manifest was generated for all 755 local experimental files. Local checksum verification completed successfully.
+
+All 755 archived S3 objects were subsequently retrieved through read-only streaming and independently hashed using SHA-256.
+
+| Verification metric | Result |
+|---|---:|
+| Expected objects | 755 |
+| Archived S3 objects | 755 |
+| SHA-256 matches | 755 |
+| Checksum failures | 0 |
+| Inventory comparison | PASS |
+| Remote integrity verification | **PASS** |
+
+The verification established byte-for-byte agreement between the archived S3 objects and the checksums recorded in the local manifest at the time of testing.
+
+No original experimental files or S3 objects were modified during verification.
+
+### 14.3 Reproducibility and Preservation
+
+**SHA-256 manifest:**
+
+`experiments/swiss_nl_2026_finals/G01/experiment_06/stage_6d3/stage_6d3_sha256_manifest.txt`
+
+**Verification script:**
+
+`scripts/aws/verify_experiment_06d3_s3.py`
+
+The manifest is stored outside the baseline archive prefix to preserve the verified 755-object inventory.
+
+The Stage 6D3 archive is maintained separately from the previously verified Stage 6D2 persistent-tracking baseline.
+
+Successful checksum verification establishes integrity at the time of testing but does not independently guarantee future availability or immutability.
+
+### 14.4 Final Status
+
+**Stage 6D3 experimental evaluation: COMPLETE**
+
+**AWS S3 archival: COMPLETE**
+
+**Local and remote SHA-256 verification: PASS — 755/755**
+
+**Checksum manifest archival: COMPLETE**
+
+**Stage 6D4 — Extended Player Identity Validation: NEXT**
