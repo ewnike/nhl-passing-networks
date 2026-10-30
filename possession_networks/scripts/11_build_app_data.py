@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Step 11 (explorer): build app/data.js for the local explorer app.
+"""Step 11 (explorer): build app/data_soccer.js for the local explorer app.
 
 Run after steps 2 to 9. The output holds match level rows derived from licensed data, so it
 is git ignored and meant for your own machine only. Then open app/index.html in a browser.
@@ -62,7 +62,7 @@ def main() -> int:
                 "windows": evidence_windows(ctx, cfg.modeling.primary_chain, WINDOWS)}
 
     payload = {
-        "meta": {"season": "Premier League 2015/16", "source": "StatsBomb open data",
+        "meta": {"sport": "soccer", "season": "Premier League 2015/16", "source": "StatsBomb open data",
                  "pitch": [round(grid.length, 3), round(grid.width, 3)],
                  "grid": [grid.nx, grid.ny], "chains": list(CHAINS),
                  "primary_chain": cfg.modeling.primary_chain,
@@ -70,7 +70,7 @@ def main() -> int:
         "teams": teams, "players": players, "matches": match_entries, "zones": zones,
         "leaders": build_leaders(xt), "evidence": evidence,
     }
-    out = REPO_ROOT / "app" / "data.js"
+    out = REPO_ROOT / "app" / "data_soccer.js"
     size = write_data_js(payload, out)
     print(f"Wrote {out.relative_to(REPO_ROOT)} ({size / 1e6:.1f} MB). Open app/index.html.")
     return 0

@@ -17,7 +17,7 @@ Free, public, pass level NHL data is hard (functionally impossible) to find. The
 | 7 | Zone grid Markov chain and pass value (four configurations) | done |
 | 8 | Incremental value test with grouped cross validation | done |
 | 9 | Optional: motifs, temporal networks, embeddings | planned |
-| 10 | Hockey adapter | planned |
+| 10 | Hockey adapter | in progress: 10a pull and 10b adapter done, hockey networks next |
 | 11 | Interactive web app | in progress |
 
 ## Quick start
@@ -45,6 +45,15 @@ python scripts/10_incremental_figures.py
 python scripts/11_build_app_data.py
 ```
 
+Hockey (step 10, Stathletes Big Data Cup 2026, separate config and outputs):
+
+```bash
+python scripts/01b_pull_stathletes.py            # events and shifts for all 10 games, prints an inventory
+python scripts/01b_pull_stathletes.py --summary  # inventory of what is already cached
+python scripts/02b_build_canonical_stathletes.py # canonical tables in data/interim/stathletes_bdc_2026/
+python scripts/03b_validate_stathletes.py        # contract and semantic checks
+```
+
 Use `python scripts/01_pull_data.py --max-matches 10` for a quick test and `--list` to see every available competition season. The default is Premier League 2015/2016 (380 matches, 20 teams). Change `config/project.yaml` to analyze a different season.
 
 ## Repository layout
@@ -52,6 +61,7 @@ Use `python scripts/01_pull_data.py --max-matches 10` for a quick test and `--li
 ```
 config/sample.yaml           synthetic sample configuration
 config/project.yaml          competition, season, pinned data commit, directories
+config/hockey.yaml           Stathletes Big Data Cup release, hockey directories
 data/raw/                    cached licensed JSON (git ignored, never committed)
 data/interim/                canonical Parquet tables (git ignored)
 data/processed/              derived features (git ignored)

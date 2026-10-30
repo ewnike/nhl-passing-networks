@@ -1,0 +1,26 @@
+# Hockey configuration: Stathletes Big Data Cup 2026 (10 games, anonymised teams).
+# Use with:  python scripts/01b_pull_stathletes.py   (this file is its default)
+# or set POSSNET_CONFIG=config/hockey.yaml for scripts that read the active config.
+source: stathletes
+
+stathletes:
+  # GitHub release that carries the data files. The tag is not a commit, so assets could be
+  # replaced upstream; the manifest hashes every file and a repeat pull reports changes.
+  repo: bigdatacup/Big-Data-Cup-2026
+  release_tag: Data
+  edition: bdc_2026
+  # Tracking files are about 25 MB per period per game (roughly 0.75 GB for all 10 games).
+  # They are not needed for the event network, so they stay off until we want them.
+  fetch_tracking: false
+  workers: 4
+  timeout_s: 120
+
+paths:
+  # Raw files land in data/raw/stathletes/bdc_2026/ (git ignored, never committed).
+  raw_dir: data/raw/stathletes
+  interim_dir: data/interim
+  processed_dir: data/processed
+  manifest_dir: data/manifests
+  # Hockey outputs are kept apart so they never overwrite the committed soccer results.
+  figures_dir: outputs/hockey/figures
+  tables_dir: outputs/hockey/tables

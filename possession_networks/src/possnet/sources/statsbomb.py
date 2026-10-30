@@ -22,24 +22,23 @@ Folder layout in the upstream repository (verified October 2026):
 
 from __future__ import annotations
 
-import hashlib
 import json
 import logging
-import os
 import re
 import subprocess
-import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 from possnet.paths import REPO_ROOT
+from possnet.sources._http import CachedFile
+from possnet.sources._http import atomic_write as _atomic_write
+from possnet.sources._http import make_session as _session
+from possnet.sources._http import sha256_file as _sha256_file
 
 LOG = logging.getLogger(__name__)
 
@@ -51,16 +50,6 @@ ATTRIBUTION_TEXT = (
     "StatsBomb attribution and logo required on any publication."
 )
 _SHA_RE = re.compile(r"^[0-9a-f]{40}$")
-
-
-@dataclass(frozen=True)
-class CachedFile:
-    """One file in the raw cache."""
-
-    path: str  # relative to the repository root, POSIX style
-    url: str
-    sha256: str
-    bytes: int
 
 
 def resolve_ref(repo: str, ref: str) -> str | None:
@@ -89,47 +78,6 @@ def resolve_ref(repo: str, ref: str) -> str | None:
         return sha if _SHA_RE.match(sha) else None
     except (requests.RequestException, ValueError):
         return None
-
-
-def _session(timeout_s: int) -> requests.Session:
-    session = requests.Session()
-    retry = Retry(
-        total=5, backoff_factor=1.5,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=("GET",),
-    )
-    session.mount("https://", HTTPAdapter(max_retries=retry))
-    session.headers["User-Agent"] = "possnet-capstone/0.1 (academic research)"
-    session.request = _with_timeout(session.request, timeout_s)  # type: ignore[method-assign]
-    return session
-
-
-def _with_timeout(fn: Any, timeout_s: int) -> Any:
-    def wrapper(*args: Any, **kwargs: Any) -> Any:
-        kwargs.setdefault("timeout", timeout_s)
-        return fn(*args, **kwargs)
-
-    return wrapper
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def _atomic_write(dest: Path, payload: bytes) -> None:
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp_name = tempfile.mkstemp(dir=dest.parent, suffix=".part")
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(payload)
-        os.replace(tmp_name, dest)
-    except BaseException:
-        Path(tmp_name).unlink(missing_ok=True)
-        raise
 
 
 class StatsBombPuller:

@@ -17,7 +17,8 @@
   "use strict";
   const App = window.App, $ = App.$, D = App.data, M = D.matches, TEAMS = D.teams, PL = D.players;
   const f = App.fmt;
-  const WINDOW_S = 900;         // seconds shown by the "last 15 min" network
+  const META = D.meta, TXT = META.text || {};   // per sport settings, see sport_ui.js
+  const WINDOW_S = META.window_s || 900;         // seconds shown by the "last 15 min" network
   const BLEND = 0.5;            // share of the assigned spot in the blended layout
   const MIN_GAP = 7;            // meters kept between two dots of the same team
   const TRAIL = 5;              // how many earlier actions stay faintly on the pitch
@@ -499,13 +500,14 @@
     ctx.strokeStyle = line; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(TL.l, mid); ctx.lineTo(w - TL.r, mid); ctx.stroke();
     ctx.setLineDash([3, 3]);
-    ctx.beginPath(); ctx.moveTo(tx(m.ht, w), 8); ctx.lineTo(tx(m.ht, w), h - 8); ctx.stroke();
+    const breaks = m.pb || [m.ht], names = META.break_labels || ["HT"];
+    for (const b of breaks) { ctx.beginPath(); ctx.moveTo(tx(b, w), 8); ctx.lineTo(tx(b, w), h - 8); ctx.stroke(); }
     ctx.setLineDash([]);
     ctx.fillStyle = muted; ctx.textAlign = "center";
-    ctx.fillText("HT", tx(m.ht, w), h - 1);
-    for (let min = 0; min * 60 <= m.end; min += 15) { ctx.fillText(min + "′", tx(min * 60, w), 11); }
+    breaks.forEach((b, q) => ctx.fillText(names[q] || "", tx(b, w), h - 1));
+    for (let s = 0; s <= m.end; s += META.tick_s || 900) { ctx.fillText(Math.round(s / 60) + "′", tx(s, w), 11); }
     for (const s of m.shots) {
-      const own = s[1] === mine, len = 5 + 28 * Math.sqrt(s[2]), x = tx(s[0], w);
+      const own = s[1] === mine, len = META.has_xg === false ? 14 : 5 + 28 * Math.sqrt(s[2]), x = tx(s[0], w);
       ctx.strokeStyle = App.rgba(own ? cMine : cOpp, 0.7); ctx.lineWidth = 1.5;
       ctx.beginPath(); ctx.moveTo(x, mid); ctx.lineTo(x, mid + (own ? -len : len)); ctx.stroke();
     }
@@ -549,7 +551,8 @@
     const m = match(), { t0, t1 } = graphs;
     const ch = count("h", t0, t1), ca = count("a", t0, t1);
     const head = `<tr><td class="l"></td><td class="v mine" style="color:var(--home)">${code(TEAMS[m.h])}</td><td class="v theirs">${code(TEAMS[m.a])}</td></tr>`;
-    els.cmp.innerHTML = head + cmpRow("Shots", ch.shots, ca.shots) + cmpRow("xG", ch.xg.toFixed(2), ca.xg.toFixed(2)) +
+    els.cmp.innerHTML = head + cmpRow("Shots", ch.shots, ca.shots) +
+      (META.has_xg === false ? "" : cmpRow("xG", ch.xg.toFixed(2), ca.xg.toFixed(2))) +
       cmpRow("Passes in network", graphs.h.passes, graphs.a.passes);
     const th = graphs.h.an ? graphs.h.an.team : null, ta = graphs.a.an ? graphs.a.an.team : null;
     const row = (label, key, fn) => cmpRow(label, th ? fn(th[key]) : "n/a", ta ? fn(ta[key]) : "n/a");
@@ -568,6 +571,7 @@
     if (k === 1) return `<b>${a}</b> pass goes astray <span>${len} m</span>`;
     if (k === 2) return `<b>${a}</b> carries the ball <span>${len} m</span>`;
     const s = match().shots.find((z) => Math.abs(z[0] - P.T[i]) < 3 && z[1] === P.side[i]);
+    if (META.has_xg === false) return P.goal[i] ? `<b>${a}</b> scores` : `<b>${a}</b> shoots`;
     return P.goal[i] ? `<b>${a}</b> scores <span>xG ${s ? s[2].toFixed(2) : ""}</span>` : `<b>${a}</b> shoots <span>xG ${s ? s[2].toFixed(2) : ""}</span>`;
   }
   function renderFeed() {
@@ -583,11 +587,13 @@
     if (j >= 0) {
       const s = sideOf(P.side[P.B[j]]);
       els.poss.innerHTML = `<i style="background:${color(s)}"></i>${TEAMS[s === "h" ? match().h : match().a]} on the ball`;
-    } else els.poss.textContent = "Kick off";
+    } else els.poss.textContent = TXT.start_pill || "Kick off";
   }
   function renderClock() {
     renderScore();
-    const txt = `${mmss(st.t)} of ${mmss(match().end)}`;
+    const pb = match().pb || [];
+    const lab = META.period_labels ? META.period_labels[pb.filter((b) => st.t >= b).length] + "  " : "";
+    const txt = `${lab}${mmss(st.t)} of ${mmss(match().end)}`;
     if (txt !== clockKey) { clockKey = txt; els.clock.textContent = txt; }
   }
 
@@ -600,6 +606,8 @@
     live: `<span><i class="lg dot"></i>Player</span><span><i class="lg ring"></i>Opponent</span><span><i class="lg ball"></i>Ball</span><span><i class="lg ln"></i>Pass</span><span><i class="lg dash"></i>Missed pass</span><span><i class="lg dots"></i>Carry</span>`,
     net: `<span><i class="lg dot"></i>Player, sized by measure</span><span><i class="lg ln"></i>Line width = passes so far</span><span><i class="lg ball"></i>Pass in flight</span>`,
   };
+  Object.assign(HOW, TXT.how || {});
+  Object.assign(LEGEND, TXT.legend || {});
   function setView(v) {
     st.view = v;
     for (const n of document.querySelectorAll("[data-for]")) n.hidden = n.dataset.for !== v;
