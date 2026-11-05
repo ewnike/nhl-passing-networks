@@ -1,0 +1,37 @@
+{
+  "game_id": "G04",
+  "competition": "Swiss National League Finals",
+  "season": "2025-2026",
+  "created_utc": "2026-11-05T21:57:35.392996+00:00",
+  "source_type": "mixed_resolution_mpegts",
+  "source_frame_rate_observed": 30,
+  "target_resolution": [
+    1920,
+    1080
+  ],
+  "target_frame_rate": 30,
+  "recovery_manifest": "metadata/G04_recovery_results_v1.json",
+  "periods": {
+    "P1": {
+      "start_segment": 469,
+      "end_segment": 753,
+      "start_visual_reference": "0469_05 \u2192 0470_00",
+      "end_visual_reference": "0748_05",
+      "notes": "Includes immediate post-period player activity."
+    },
+    "P2": {
+      "start_segment": 932,
+      "end_segment": 1291,
+      "start_visual_reference": "0932_05 \u2192 0933_01",
+      "end_visual_reference": "1290_04",
+      "notes": "Includes immediate post-period player activity."
+    },
+    "P3": {
+      "start_segment": 1473,
+      "end_segment": 1872,
+      "start_visual_reference": "1473_06 \u2192 1474_00",
+      "end_visual_reference": "1866_01",
+      "notes": "Includes immediate postgame celebrations."
+    }
+  }
+}

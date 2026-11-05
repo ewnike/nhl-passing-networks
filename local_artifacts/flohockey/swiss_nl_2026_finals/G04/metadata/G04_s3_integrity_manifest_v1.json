@@ -1,0 +1,32 @@
+{
+  "game_id": "G04",
+  "created_utc": "2026-11-05T22:59:31.751925+00:00",
+  "artifact_count": 5,
+  "artifacts": [
+    {
+      "path": "periods/G04_P1.mp4",
+      "bytes": 1961571216,
+      "sha256": "21041b4e6508eaa7af3077691c1ec94e5568b49ae61d8bd6c06eb53f59c18026"
+    },
+    {
+      "path": "periods/G04_P2.mp4",
+      "bytes": 2521482962,
+      "sha256": "eae7118bb18325bc50fd142c9c8b3ef62eded416b0dd246b476792a548d850f5"
+    },
+    {
+      "path": "periods/G04_P3.mp4",
+      "bytes": 2765135457,
+      "sha256": "c46ef75e0aa63e8d702257f746c0a3c18c53b1d489ecddc671032cc285433b7c"
+    },
+    {
+      "path": "metadata/period_boundaries.json",
+      "bytes": 1097,
+      "sha256": "c577bdb3e18126b761b48e7860e36836a313bbd52ec88ba7b5f001128b5ed8e4"
+    },
+    {
+      "path": "metadata/G04_recovery_results_v1.json",
+      "bytes": 31097,
+      "sha256": "8a43f77364186ae9b2d6f770bc5a66d0e865a803aa72f81d50f356210109a47d"
+    }
+  ]
+}
