@@ -1,0 +1,736 @@
+{
+  "game_id": "G04",
+  "created_utc": "2026-11-05T20:08:19.023805+00:00",
+  "status": "partial_1080p_acquisition_recovery_planned",
+  "competition": "Swiss National League Finals",
+  "season": "2025-2026",
+  "source": "FloHockey",
+  "expected_segments": 1761,
+  "original_1080p_segments": 1681,
+  "missing_1080p_segments": 80,
+  "fallback_coverage": 80,
+  "fallback_downloaded": 0,
+  "resolution_note": "Fallback renditions are not interchangeable with native 1080p. Preserve provenance and do not silently mix codecs or resolutions during MP4 assembly.",
+  "segments": [
+    {
+      "sequence": 166,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 196,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 216,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 226,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 236,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 246,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 256,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 276,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 296,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 316,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 346,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 366,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 426,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 436,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 456,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 516,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 526,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 536,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 546,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 566,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 586,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 626,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 636,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 646,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 656,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 716,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 726,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 736,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 766,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 776,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 806,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 816,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 836,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 846,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 866,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 916,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 936,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 976,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 986,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1026,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1036,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1046,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1076,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1086,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1106,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1136,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1176,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1196,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1216,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1226,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1236,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1246,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1266,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1276,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1326,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1336,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1386,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1396,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1406,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1446,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1466,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1486,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1496,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1526,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1536,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1546,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1556,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1566,
+      "resolution": "480p",
+      "bandwidth": 2000000,
+      "rendition_id": 4,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1616,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1676,
+      "resolution": "270p",
+      "bandwidth": 600000,
+      "rendition_id": 6,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1696,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1706,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1716,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1726,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1736,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1746,
+      "resolution": "540p",
+      "bandwidth": 2800000,
+      "rendition_id": 3,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1756,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1776,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1786,
+      "resolution": "720p",
+      "bandwidth": 5000000,
+      "rendition_id": 2,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    },
+    {
+      "sequence": 1826,
+      "resolution": "360p",
+      "bandwidth": 1200000,
+      "rendition_id": 5,
+      "availability": "HTTP_206_RANGE_CONFIRMED",
+      "download_status": "NOT_DOWNLOADED",
+      "sha256": null
+    }
+  ]
+}
