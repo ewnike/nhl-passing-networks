@@ -1,0 +1,61 @@
+{
+  "game_id": "G05",
+  "competition": "Swiss National League Finals",
+  "season": "2025-2026",
+  "created_utc": "2026-11-06T00:05:23.612725+00:00",
+  "expected_segments": 2022,
+  "sequence_start": 164,
+  "sequence_end": 2185,
+  "primary_rendition": "1080p",
+  "playlists": [
+    {
+      "rendition": "master",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/playlist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_master.m3u8",
+      "bytes": 1127,
+      "sha256": "1ef5614749cc95de130df7c2cd679379a226f77a29bd5dbfe0330eb7bf142fd1"
+    },
+    {
+      "rendition": "1080p",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/a/8000/chunklist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_1080p.m3u8",
+      "bytes": 87008,
+      "sha256": "4b59293945546c3aec199d7ee7abb6434d3a62adc3361ead5c171d4ba3ee344d"
+    },
+    {
+      "rendition": "720p",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/a/5000/chunklist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_720p.m3u8",
+      "bytes": 87008,
+      "sha256": "d81595e672e7aeaddfcec8475c8c785a4e5106f18a905327c2af0907ad5de124"
+    },
+    {
+      "rendition": "540p",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/a/2800/chunklist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_540p.m3u8",
+      "bytes": 87008,
+      "sha256": "30a8ecf2a8a3c4b21d15c3f90f81320cb73fc445ce010c59cda0a5e96ff0f87c"
+    },
+    {
+      "rendition": "480p",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/a/2000/chunklist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_480p.m3u8",
+      "bytes": 87008,
+      "sha256": "87614871e444221e53bcc2d124b5791c5cfeabd67a008c3c825d6c422f952e18"
+    },
+    {
+      "rendition": "360p",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/a/1200/chunklist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_360p.m3u8",
+      "bytes": 87008,
+      "sha256": "caa70629d9000e43091ce144f4837f14eef75d3341a6c2a0a075a4a53008037a"
+    },
+    {
+      "rendition": "270p",
+      "source_url": "https://d17cyqyz9yhmep.cloudfront.net/streams/355877/a/600/chunklist_vo_1777224672000_1777236803350.m3u8",
+      "local_path": "metadata/playlists/G05_270p.m3u8",
+      "bytes": 87008,
+      "sha256": "fa1ece9392030607acdef1d6d2fc7bc04b03c48d5042a7aa594ef5e3ba089bef"
+    }
+  ]
+}
