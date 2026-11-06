@@ -1,0 +1,77 @@
+{
+  "game_id": "G05",
+  "competition": "Swiss National League Finals",
+  "season": "2025-2026",
+  "created_utc": "2026-11-06T01:29:37.608438+00:00",
+  "status": "provisional_visual_boundaries",
+  "source_type": "HLS MPEG-TS",
+  "source_rendition": "1080p",
+  "source_resolution": [
+    1920,
+    1080
+  ],
+  "source_frame_rate_observed": 30,
+  "source_playlist_sha256": "4b59293945546c3aec199d7ee7abb6434d3a62adc3361ead5c171d4ba3ee344d",
+  "source_registration_sha256": "afbc5b674e7625eb453838cca007b9f60d5257b6dcc30694912aa46640736ce2",
+  "target_resolution": [
+    1920,
+    1080
+  ],
+  "target_frame_rate": 30,
+  "total_selected_segments": 1092,
+  "total_playlist_duration_seconds": 6552.0,
+  "periods": [
+    {
+      "period": "P1",
+      "start_sequence": 466,
+      "end_sequence": 859,
+      "opening_reference": "467: opening faceoff and live gameplay",
+      "ending_reference": "853: transition from gameplay to post-period coverage",
+      "notes": "Includes opening faceoff and immediate post-period interactions.",
+      "segment_count": 394,
+      "playlist_duration_seconds": 2364.0
+    },
+    {
+      "period": "P2",
+      "start_sequence": 1040,
+      "end_sequence": 1366,
+      "opening_reference": "1040-1041: opening faceoff",
+      "ending_reference": "1362-1363: final gameplay and post-period transition",
+      "notes": "Includes opening faceoff and immediate post-period interactions.",
+      "segment_count": 327,
+      "playlist_duration_seconds": 1962.0
+    },
+    {
+      "period": "P3",
+      "start_sequence": 1539,
+      "end_sequence": 1866,
+      "opening_reference": "1539: opening faceoff",
+      "ending_reference": "1856 sample 4: provisional end-of-regulation reference",
+      "score_reference": "1863: end-of-regulation graphic showing 4-4",
+      "notes": "Regulation ends tied 4-4. Includes post-period player interactions.",
+      "segment_count": 328,
+      "playlist_duration_seconds": 1968.0
+    },
+    {
+      "period": "OT1",
+      "start_sequence": 2035,
+      "end_sequence": 2077,
+      "opening_reference": "2037 sample 0 to sample 1: overtime faceoff",
+      "ending_reference": "2070 sample 1 to sample 2: winning-goal transition",
+      "score_reference": "2070-2071: stopped OT1 clock at 17:34",
+      "notes": "Sudden-death overtime. Includes immediate goal celebrations and player close-ups through segment 2077. Post-goal footage is not eligible for chronological passing-event extraction.",
+      "segment_count": 43,
+      "playlist_duration_seconds": 258.0
+    }
+  ],
+  "research_notes": [
+    "Game 5 includes sudden-death overtime.",
+    "Regulation ended tied 4-4.",
+    "Period ranges are inclusive MPEG-TS sequence boundaries.",
+    "Sample references are approximately one-second observations.",
+    "Selected ranges intentionally preserve immediate post-period activity.",
+    "Replay and postgame footage must be excluded from chronological passing-event extraction.",
+    "OT1 includes additional player close-ups potentially useful for the 8,800-image identification library.",
+    "Period boundaries remain provisional until reconstructed video review."
+  ]
+}

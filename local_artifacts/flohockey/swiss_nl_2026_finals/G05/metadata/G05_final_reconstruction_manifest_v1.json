@@ -1,0 +1,88 @@
+{
+  "game_id": "G05",
+  "created_utc": "2026-11-06T02:40:41.424966+00:00",
+  "status": "verified_local_reconstruction",
+  "source_boundary_manifest_sha256": "5b4acd7ffca885b9ca65d870c5cbbe5a936948dd46ca869dadd650524c3dab2e",
+  "source_rendition": "1080p",
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "frame_rate": 30,
+  "period_count": 4,
+  "total_selected_segments": 1092,
+  "total_decoded_frames": 196560,
+  "total_mp4_bytes": 6714036225,
+  "periods": [
+    {
+      "period": "P1",
+      "filename": "G05_P1_1080p_tsconcat_v2.mp4",
+      "relative_path": "reconstructed_periods/G05_P1_1080p_tsconcat_v2.mp4",
+      "bytes": 2422319415,
+      "sha256": "4783e15e0dc6deb6dd761bf69a958c8e2fd235ce1e7bcbd15d83f587bfea89e0",
+      "source_start_sequence": 466,
+      "source_end_sequence": 859,
+      "source_segment_count": 394,
+      "expected_decoded_frames": 70920,
+      "reconstruction_method": "mpegts_byte_concat_stream_copy_v2",
+      "technical_validation": "PASS",
+      "visual_validation": "PASS",
+      "audio_validation": "PASS"
+    },
+    {
+      "period": "P2",
+      "filename": "G05_P2_1080p.mp4",
+      "relative_path": "reconstructed_periods/G05_P2_1080p.mp4",
+      "bytes": 2010583291,
+      "sha256": "6956f31d1ba999c3aa7302521a33df75b1cae18c309d621ebdb5064f7c0cba91",
+      "source_start_sequence": 1040,
+      "source_end_sequence": 1366,
+      "source_segment_count": 327,
+      "expected_decoded_frames": 58860,
+      "reconstruction_method": "ffmpeg_concat_demuxer_stream_copy",
+      "technical_validation": "PASS",
+      "visual_validation": "PASS",
+      "audio_validation": "PASS"
+    },
+    {
+      "period": "P3",
+      "filename": "G05_P3_1080p_tsconcat_v2.mp4",
+      "relative_path": "reconstructed_periods/G05_P3_1080p_tsconcat_v2.mp4",
+      "bytes": 2016753542,
+      "sha256": "f4eb4b0b3a875b2d15829a0a49dc2d63532266a14487dde24aa98fa9cd58b128",
+      "source_start_sequence": 1539,
+      "source_end_sequence": 1866,
+      "source_segment_count": 328,
+      "expected_decoded_frames": 59040,
+      "reconstruction_method": "mpegts_byte_concat_stream_copy_v2",
+      "technical_validation": "PASS",
+      "visual_validation": "PASS",
+      "audio_validation": "PASS"
+    },
+    {
+      "period": "OT1",
+      "filename": "G05_OT1_1080p.mp4",
+      "relative_path": "reconstructed_periods/G05_OT1_1080p.mp4",
+      "bytes": 264379977,
+      "sha256": "b618640f3f015ced8ef9fe3e0d27d11e18b1f423c1e3a0642304e57749449fc3",
+      "source_start_sequence": 2035,
+      "source_end_sequence": 2077,
+      "source_segment_count": 43,
+      "expected_decoded_frames": 7740,
+      "reconstruction_method": "ffmpeg_concat_demuxer_stream_copy",
+      "technical_validation": "PASS",
+      "visual_validation": "PASS",
+      "audio_validation": "PASS"
+    }
+  ],
+  "notes": [
+    "P1 and P3 use corrected MPEG-TS byte concatenation.",
+    "Original P1 and P3 concat-demuxer reconstructions are preserved.",
+    "P2 and OT1 use the original verified stream-copy reconstructions.",
+    "All four periods passed visual and audio inspection.",
+    "Original MPEG-TS acquisition files remain unchanged.",
+    "Remote AWS S3 integrity verification is pending."
+  ]
+}
