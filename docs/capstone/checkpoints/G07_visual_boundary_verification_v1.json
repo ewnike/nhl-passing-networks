@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "game": "G07",
+  "review_date": "2026-11-06",
+  "status": "visual_coverage_verified",
+  "timing_basis": {
+    "playlist": "metadata/G07_1080p_playlist.m3u8",
+    "first_sequence": 323,
+    "last_sequence": 2710,
+    "total_segments": 2388,
+    "total_duration_seconds": 14316,
+    "discontinuity_sequences": [
+      331,
+      2707
+    ],
+    "notes": "Recorded observations are playlist-relative timestamps. Exact event frames have not been established."
+  },
+  "reconstructed_period_sequence_ranges": {
+    "P1": [
+      491,
+      825
+    ],
+    "P2": [
+      1005,
+      1317
+    ],
+    "P3": [
+      1495,
+      1879
+    ],
+    "OT1": [
+      2055,
+      2144
+    ]
+  },
+  "boundary_observations": {
+    "P1_start": [
+      {
+        "sequence": 494,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "00:17:09",
+        "game_clock": null,
+        "description": "Referee leaving center-ice faceoff circle; puck appears to have been dropped."
+      },
+      {
+        "sequence": 494,
+        "offset_seconds": 5,
+        "broadcast_timestamp": "00:17:11",
+        "game_clock": "19:58",
+        "description": "First-period gameplay underway."
+      }
+    ],
+    "P1_end": [
+      {
+        "sequence": 825,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "00:50:15",
+        "game_clock": "1.2",
+        "description": "First-period clock approaching expiration."
+      },
+      {
+        "sequence": 825,
+        "offset_seconds": 5,
+        "broadcast_timestamp": "00:50:17",
+        "game_clock": "0.0",
+        "description": "First-period clock expired."
+      }
+    ],
+    "P2_start": [
+      {
+        "sequence": 1005,
+        "offset_seconds": 2,
+        "broadcast_timestamp": "01:08:14",
+        "game_clock": "20:00",
+        "description": "Opening faceoff visually observed."
+      },
+      {
+        "sequence": 1005,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "01:08:15",
+        "game_clock": "19:59",
+        "description": "Second-period clock running."
+      }
+    ],
+    "P2_end": [
+      {
+        "sequence": 1317,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "01:39:27",
+        "game_clock": "0.5",
+        "description": "Second-period clock approaching expiration."
+      },
+      {
+        "sequence": 1317,
+        "offset_seconds": 5,
+        "broadcast_timestamp": "01:39:29",
+        "game_clock": "0.0",
+        "description": "Second-period clock expired."
+      }
+    ],
+    "P3_start": [
+      {
+        "sequence": 1498,
+        "offset_seconds": 1,
+        "broadcast_timestamp": "01:57:31",
+        "game_clock": null,
+        "description": "Game clock not visible."
+      },
+      {
+        "sequence": 1498,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "01:57:33",
+        "game_clock": "19:59",
+        "description": "Third-period gameplay underway."
+      }
+    ],
+    "P3_end": [
+      {
+        "sequence": 1875,
+        "offset_seconds": 5,
+        "broadcast_timestamp": "02:35:17",
+        "game_clock": "0.5",
+        "description": "Third-period clock approaching expiration."
+      },
+      {
+        "sequence": 1877,
+        "offset_seconds": 1,
+        "broadcast_timestamp": "02:35:25",
+        "game_clock": "0.0",
+        "description": "Third-period clock expired."
+      }
+    ],
+    "OT1_start": [
+      {
+        "sequence": 2058,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "02:53:33",
+        "game_clock": "20:00",
+        "description": "Overtime clock at full period duration."
+      },
+      {
+        "sequence": 2058,
+        "offset_seconds": 5,
+        "broadcast_timestamp": "02:53:35",
+        "game_clock": "19:59",
+        "description": "Overtime clock running."
+      }
+    ],
+    "OT1_end": [
+      {
+        "sequence": 2143,
+        "offset_seconds": 1,
+        "broadcast_timestamp": "03:02:01",
+        "game_clock": "14:06",
+        "description": "Active overtime gameplay."
+      },
+      {
+        "sequence": 2143,
+        "offset_seconds": 3,
+        "broadcast_timestamp": "03:02:03",
+        "game_clock": "14:04",
+        "description": "Game-winning goal celebration; overtime clock stopped at 14:04."
+      }
+    ]
+  },
+  "contact_sheets": {
+    "P1_start": {
+      "path": "inspection/period_boundaries_v1/G07_P1_start_v1.jpg",
+      "sha256": "3e85bd7a4b0670d7307b217a12fcad40b4d1d703b67a6d4e1de0b9a4d03ff77d",
+      "sampled_frames": 33
+    },
+    "P1_end": {
+      "path": "inspection/period_boundaries_v1/G07_P1_end_v1.jpg",
+      "sha256": "1268ef4a8356a8ff2d493715981a3bdc8a9230af3274bb86a902ae7523ec427e",
+      "sampled_frames": 33
+    },
+    "P2_start": {
+      "path": "inspection/period_boundaries_v1/G07_P2_start_v1.jpg",
+      "sha256": "f3b09d1ba574dd38924539502f24109c30047c288b7d4022cfe3818e11e1014f",
+      "sampled_frames": 33
+    },
+    "P2_end": {
+      "path": "inspection/period_boundaries_v1/G07_P2_end_v1.jpg",
+      "sha256": "eb161092b1e6afea22360013ba455742b9d103dbf4ed4c04c205583d2fad2506",
+      "sampled_frames": 33
+    },
+    "P3_start": {
+      "path": "inspection/period_boundaries_v1/G07_P3_start_v1.jpg",
+      "sha256": "7d720cbb37792e016e768229ffe377320ea33228b4e02a78546617e554fe783e",
+      "sampled_frames": 33
+    },
+    "P3_end": {
+      "path": "inspection/period_boundaries_v1/G07_P3_end_v1.jpg",
+      "sha256": "f5059b7e21a25a5c17293c152d44c8809ba57dceb916bdf4d4173f56878c0327",
+      "sampled_frames": 33
+    },
+    "OT1_start": {
+      "path": "inspection/period_boundaries_v1/G07_OT1_start_v1.jpg",
+      "sha256": "89b86009eb9fc0c880653b537f83fb263dd8d3688bb79c9e33be66b09d3ba278",
+      "sampled_frames": 33
+    },
+    "OT1_end": {
+      "path": "inspection/period_boundaries_v1/G07_OT1_end_v1.jpg",
+      "sha256": "07dd701c113e5ccd52fb9985f23b612847533dc03c589c06dbb5a075f21790fb",
+      "sampled_frames": 33
+    }
+  },
+  "conclusions": {
+    "all_eight_boundaries_reviewed": true,
+    "all_observed_events_within_reconstructed_ranges": true,
+    "reconstruction_extension_required": false,
+    "frame_accurate_event_boundaries_verified": false,
+    "original_artifacts_modified": false
+  },
+  "outstanding_work": [
+    "Determine exact opening puck-drop frames at 25 FPS.",
+    "Determine exact regulation period-ending frames.",
+    "Determine exact overtime game-winning goal frame.",
+    "Create frame-accurate annotations in the FiftyOne research workstation."
+  ]
+}
