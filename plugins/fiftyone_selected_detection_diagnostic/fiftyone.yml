@@ -1,0 +1,5 @@
+name: nhl_selected_detection_diagnostic
+version: 1.0.0
+description: Read-only diagnostic for selected hockey player detections
+operators:
+  - selected_detection_diagnostic
