@@ -1,0 +1,6 @@
+name: nhl_player_identity_review
+version: 0.2.0
+description: G01 player identity review with preview and atomic submission
+operators:
+  - review_player_identity
+  - submit_protected_review
