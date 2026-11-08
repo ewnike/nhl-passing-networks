@@ -502,10 +502,20 @@ class SubmitProtectedReview(ReviewPlayerIdentity):
         )
 
     def resolve_input(self, ctx):
-        # Reuse the preview operator's validated form.
+        # Reuse all validated input fields from the preview form.
         form = super().resolve_input(ctx)
-        form.view.label = "NHL Player Identity Review — Submit"
-        return form
+
+        # Construct a fresh property so the submission-specific
+        # title is present in FiftyOne's serialized form metadata.
+        return types.Property(
+            form.type,
+            view=types.View(
+                label=(
+                    "NHL Player Identity Review "
+                    "— Protected Submission"
+                )
+            ),
+        )
 
     def execute(self, ctx):
         selected = None
